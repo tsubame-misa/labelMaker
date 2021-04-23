@@ -21,7 +21,7 @@ const Home = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton color="medium">
+          <IonFabButton color="dark">
             <IonIcon icon={addOutline} />
           </IonFabButton>
         </IonFab>
