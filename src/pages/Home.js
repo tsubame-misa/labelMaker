@@ -16,7 +16,7 @@ const Home = ({history}) => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>LableMaker</IonTitle>
+          <IonTitle>ayano</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
