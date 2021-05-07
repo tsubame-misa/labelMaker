@@ -20,6 +20,7 @@ const Home = ({history}) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        misato
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton color="dark" onClick={()=>{history.push("/makeList")}}>
             <IonIcon icon={addOutline} />
