@@ -16,10 +16,11 @@ const Home = ({history}) => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>ayano</IonTitle>
+          <IonTitle>LableMaker</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        ayano
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton color="dark" onClick={()=>{history.push("/makeList")}}>
             <IonIcon icon={addOutline} />
