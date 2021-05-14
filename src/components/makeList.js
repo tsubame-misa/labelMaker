@@ -17,7 +17,7 @@ import { addOutline } from "ionicons/icons";
 import "../pages/Home.css";
 import { useState } from "react";
 
-const useMakeList = () => {
+const MakeList = () => {
   const [programName, setProgramName] = useState();
   return (
     <IonPage>
@@ -39,4 +39,4 @@ const useMakeList = () => {
   );
 };
 
-export default useMakeList;
+export default MakeList;
