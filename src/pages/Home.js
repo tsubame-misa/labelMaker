@@ -11,7 +11,7 @@ import {
 import { addOutline } from "ionicons/icons";
 import "./Home.css";
 
-const Home = ({history}) => {
+const Home = ({ history }) => {
   return (
     <IonPage>
       <IonHeader>
@@ -21,7 +21,12 @@ const Home = ({history}) => {
       </IonHeader>
       <IonContent fullscreen>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton color="dark" onClick={()=>{history.push("/makeList")}}>
+          <IonFabButton
+            color="dark"
+            onClick={() => {
+              history.push("/makeList");
+            }}
+          >
             <IonIcon icon={addOutline} />
           </IonFabButton>
         </IonFab>
