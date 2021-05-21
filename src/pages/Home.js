@@ -1,9 +1,12 @@
 import {
   IonContent,
+  IonIcon,
   IonFab,
   IonFabButton,
+  IonItem,
+  IonButton,
+  IonLabel,
   IonHeader,
-  IonIcon,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -12,6 +15,8 @@ import { addOutline } from "ionicons/icons";
 import "./Home.css";
 
 const Home = ({ history }) => {
+  const data = JSON.parse(localStorage.getItem("data"));
+  console.log(data);
   return (
     <IonPage>
       <IonHeader>
@@ -20,6 +25,9 @@ const Home = ({ history }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        {data.map((item, key) => {
+          return <IonItem key={key}>{item.label}</IonItem>;
+        })}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton
             color="dark"
