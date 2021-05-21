@@ -12,30 +12,61 @@ import {
   IonInput,
   IonItem,
   IonLabel,
+  IonAvatar,
+  IonBackButton,
+  IonButtons,
 } from "@ionic/react";
 import { addOutline } from "ionicons/icons";
 import "../pages/Home.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MakeList = () => {
   const [programName, setProgramName] = useState();
+  const [data, setData] = useState([]);
+
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>番組を登録する</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent>
+        <IonHeader>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button>
+                戻る
+          </ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button>
+                保存
+          </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+          <ion-toolbar>
+            <ion-title>番組名を登録する</ion-title>
+          </ion-toolbar>
+        </IonHeader>
         <IonItem>
           <IonInput
             value={programName}
             placeholder="番組名"
             onIonChange={(e) => setProgramName(e.detail.value)}
+
           ></IonInput>
         </IonItem>
+        <IonItem>
+          <ion-buttons slot="start">
+            <ion-button>
+              ＋
+          </ion-button>
+            <IonInput
+              value={programName}
+              placeholder="番組名"
+              onIonChange={(e) => setProgramName(e.detail.value)}
+            ></IonInput>
+          </ion-buttons>
+        </IonItem>
+        <ion-button expand="block">ラベル印刷</ion-button>
       </IonContent>
-    </IonPage>
+    </IonPage >
   );
 };
 
