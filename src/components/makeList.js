@@ -15,6 +15,8 @@ import {
   IonAvatar,
   IonBackButton,
   IonButtons,
+  IonItemOption,
+  IonItemOptions,
 } from "@ionic/react";
 import { addOutline } from "ionicons/icons";
 import "../pages/Home.css";
@@ -51,19 +53,26 @@ const MakeList = () => {
             onIonChange={(e) => setProgramName(e.detail.value)}
 
           ></IonInput>
+
         </IonItem>
-        <IonItem>
-          <ion-buttons slot="start">
-            <ion-button>
-              ＋
+        <IonItemSliding>
+          <IonItem>
+            <ion-buttons slot="start">
+              <ion-button>
+                ＋
           </ion-button>
-            <IonInput
-              value={programName}
-              placeholder="番組名"
-              onIonChange={(e) => setProgramName(e.detail.value)}
-            ></IonInput>
-          </ion-buttons>
-        </IonItem>
+
+              <IonInput
+                value={programName}
+                placeholder="番組名"
+                onIonChange={(e) => setProgramName(e.detail.value)}
+              ></IonInput>
+            </ion-buttons>
+          </IonItem>
+          <IonItemOptions side="end">
+            <IonItemOption color="danger" onClick={() => console.log('share clicked')}>削除</IonItemOption>
+          </IonItemOptions>
+        </IonItemSliding>
         <ion-button expand="block">ラベル印刷</ion-button>
       </IonContent>
     </IonPage >
