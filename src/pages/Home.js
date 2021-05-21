@@ -20,6 +20,7 @@ const Home = ({ history }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        kei
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton
             color="dark"
