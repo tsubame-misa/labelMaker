@@ -10,6 +10,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  IonSearchbar,
   IonItemSliding,
 } from "@ionic/react";
 import { addOutline } from "ionicons/icons";
@@ -39,6 +40,8 @@ const Home = ({ history }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+      <p>Default Searchbar</p>
+      <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
         {data.map((item, key) => {
           return (
             <IonItemSliding key={key}>
