@@ -25,8 +25,8 @@ const Home = ({ history }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {data.map(() => {
-          return <IonItem></IonItem>;
+        {data.map((item, key) => {
+          return <IonItem key={key}>{item.label}</IonItem>;
         })}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton
