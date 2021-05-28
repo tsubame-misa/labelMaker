@@ -28,10 +28,10 @@ const MakeList = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
+              <IonBackButton color="primary" defaultHref="/" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton>保存</IonButton>
+              <IonButton color="primary">保存</IonButton>
             </IonButtons>
           </IonToolbar>
           <IonToolbar>
