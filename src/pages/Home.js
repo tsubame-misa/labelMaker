@@ -39,7 +39,7 @@ const Home = ({ history }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {data.map((item, key) => {
+        {data?.map((item, key) => {
           return (
             <IonItemSliding key={key}>
               <IonItem>{item.label}</IonItem>
