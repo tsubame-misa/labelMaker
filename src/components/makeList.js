@@ -1,29 +1,22 @@
 import {
   IonContent,
   IonHeader,
-  IonIcon,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonItemSliding,
   IonInput,
   IonItem,
+  IonToolbar,
   IonItemOption,
   IonItemOptions,
-  IonLabel,
-  IonAvatar,
   IonBackButton,
   IonButtons,
 } from "@ionic/react";
-import { addOutline } from "ionicons/icons";
 import "../pages/Home.css";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 const MakeList = () => {
-  const [programName, setProgramName] = useState([]);
   const [programs, setProcrams] = useState([{ name: "" }]);
-  const [data, setData] = useState([]);
   const [labelName, setLabelName] = useState();
   /*useEffect(() => {
     setData(programName);
@@ -33,21 +26,21 @@ const MakeList = () => {
     <IonPage>
       <IonContent>
         <IonHeader>
-          <ion-toolbar>
+          <IonToolbar>
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" />
             </IonButtons>
-            <ion-buttons slot="end">
-              <ion-button>保存</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-          <ion-toolbar>
+            <IonButtons slot="end">
+              <IonButton>保存</IonButton>
+            </IonButtons>
+          </IonToolbar>
+          <IonToolbar>
             <IonInput
               value={labelName}
               placeholder="ラベル名"
               onIonChange={(e) => setLabelName(e.detail.value)}
             ></IonInput>
-          </ion-toolbar>
+          </IonToolbar>
         </IonHeader>
 
         {programs.map((item, key) => {
@@ -86,7 +79,7 @@ const MakeList = () => {
           ＋
         </IonButton>
 
-        <ion-button expand="block">ラベル印刷</ion-button>
+        <IonButton expand="block">ラベル印刷</IonButton>
       </IonContent>
     </IonPage>
   );
