@@ -24,6 +24,7 @@ const MakeList = () => {
   const [programName, setProgramName] = useState([]);
   const [programs, setProcrams] = useState([{ name: "" }]);
   const [data, setData] = useState([]);
+  const [labelName, setLabelName] = useState();
   /*useEffect(() => {
     setData(programName);
   }, []);*/
@@ -33,15 +34,19 @@ const MakeList = () => {
       <IonContent>
         <IonHeader>
           <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button>戻る</ion-button>
-            </ion-buttons>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/" />
+            </IonButtons>
             <ion-buttons slot="end">
               <ion-button>保存</ion-button>
             </ion-buttons>
           </ion-toolbar>
           <ion-toolbar>
-            <ion-title>番組名を登録する</ion-title>
+            <IonInput
+              value={labelName}
+              placeholder="ラベル名"
+              onIonChange={(e) => setLabelName(e.detail.value)}
+            ></IonInput>
           </ion-toolbar>
         </IonHeader>
 
