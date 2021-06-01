@@ -39,7 +39,7 @@ const MakeList = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
+              <IonBackButton color="primary" defaultHref="/" />
             </IonButtons>
             <IonButtons slot="end">
               <IonButton onClick={() => pushData()}>保存</IonButton>

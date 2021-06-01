@@ -61,7 +61,7 @@ const Home = ({ history }) => {
         })}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton
-            color="dark"
+            color="primary"
             onClick={() => {
               history.push("/makeList");
             }}
