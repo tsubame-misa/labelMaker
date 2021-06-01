@@ -20,17 +20,19 @@ const Home = ({ history }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const getData = JSON.parse(localStorage.getItem("data"));
-    setData(getData);
+    const getData = async () => {
+      const getData = JSON.parse(localStorage.getItem("data"));
+      setData(getData);
+    };
+    getData();
   }, [data]);
 
   function delItem(id) {
-    console.log("del", id);
-    const newData = data.filter((item, key) => key !== id);
+    const newData = data.filter((_, key) => key !== id);
     localStorage.removeItem("data");
     localStorage.setItem("data", JSON.stringify(newData));
-    console.log(newData);
   }
+
   return (
     <IonPage>
       <IonHeader>

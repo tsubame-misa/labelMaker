@@ -11,16 +11,27 @@ import {
   IonItemOptions,
   IonBackButton,
   IonButtons,
+  useIonViewWillEnter,
 } from "@ionic/react";
+
 import "../pages/Home.css";
-import {  useState } from "react";
+import { useState } from "react";
 
 const MakeList = () => {
   const [programs, setProcrams] = useState([{ name: "" }]);
   const [labelName, setLabelName] = useState();
-  /*useEffect(() => {
-    setData(programName);
-  }, []);*/
+  const [data, setData] = useState([]);
+
+  useIonViewWillEnter(() => {
+    const getData = JSON.parse(localStorage.getItem("data"));
+    setData(getData);
+  }, [data]);
+
+  function pushData() {
+    const new_data = { label: labelName, i_list: programs };
+    data.push(new_data);
+    localStorage.setItem("data", JSON.stringify(data));
+  }
 
   return (
     <IonPage>
@@ -31,7 +42,7 @@ const MakeList = () => {
               <IonBackButton defaultHref="/" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton>保存</IonButton>
+              <IonButton onClick={() => pushData()}>保存</IonButton>
             </IonButtons>
           </IonToolbar>
           <IonToolbar>
@@ -45,7 +56,7 @@ const MakeList = () => {
 
         {programs.map((item, key) => {
           return (
-            <IonItemSliding>
+            <IonItemSliding key={key}>
               <IonItem>
                 <IonInput
                   value={item.name}
