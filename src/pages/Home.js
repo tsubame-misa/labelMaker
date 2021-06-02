@@ -18,7 +18,7 @@ import "./Home.css";
 
 const Home = ({ history }) => {
   const [data, setData] = useState([]);
-  const [lastId, setLastId] = useState();
+  const [nextId, setNextId] = useState();
 
   useEffect(() => {
     const getData = async () => {
@@ -27,7 +27,9 @@ const Home = ({ history }) => {
     };
     getData();
     const getLastId = localStorage.getItem("lastId");
-    getLastId === null ? setLastId(0) : setLastId(getLastId);
+    getLastId === null
+      ? setNextId(0)
+      : setNextId(Number(getLastId) + Number(1));
   }, [data]);
 
   function delItem(id) {
@@ -44,7 +46,7 @@ const Home = ({ history }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {data.map((d, key) => {
+        {data?.map((d, key) => {
           return (
             <IonItemSliding key={key}>
               <IonItem routerLink={`/list/${data[key].id}`}>{d.label}</IonItem>
@@ -66,7 +68,7 @@ const Home = ({ history }) => {
           <IonFabButton
             color="primary"
             onClick={() => {
-              history.push(`/makeList/${lastId}`);
+              history.push(`/makeList/${nextId}`);
             }}
           >
             <IonIcon icon={addOutline} />

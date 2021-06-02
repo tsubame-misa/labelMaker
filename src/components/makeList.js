@@ -16,21 +16,31 @@ import {
 
 import "../pages/Home.css";
 import { useState } from "react";
+import { useParams } from "react-router";
 
 const MakeList = () => {
+  const { id } = useParams();
   const [programs, setProcrams] = useState([{ name: "" }]);
   const [labelName, setLabelName] = useState();
   const [data, setData] = useState([]);
   const [lastId, setLastId] = useState(0);
-  const [id, setId] = useState(-1);
+  const [p_id, setId] = useState(-1);
 
   useIonViewWillEnter(() => {
     const getData = JSON.parse(localStorage.getItem("data"));
     setData(getData);
     const getLastId = localStorage.getItem("lastId");
-    function changeIDs(id) {
-      setLastId(Number(id) + Number(1));
-      setId(Number(id) + Number(1));
+    function changeIDs(p_id) {
+      setLastId(Number(p_id) + Number(1));
+      setId(Number(p_id) + Number(1));
+      if (id <= p_id) {
+        for (const item of getData) {
+          if (item.id === Number(id)) {
+            setProcrams(item.i_list);
+            setLabelName(item.label);
+          }
+        }
+      }
     }
     getLastId === null ? changeIDs(0) : changeIDs(getLastId);
   }, [data]);
@@ -44,16 +54,16 @@ const MakeList = () => {
       data.push(new_data);
       localStorage.setItem("data", JSON.stringify(data));
     } else {
-      console.log(new_data);
       localStorage.setItem("data", JSON.stringify([new_data]));
     }
     setLastId(lastId);
-    console.log(lastId, "id =", id);
     localStorage.setItem("lastId", lastId);
   }
 
-  console.log(lastId);
-  console.log(id);
+  function delItem(key) {
+    const newData = programs.filter((_, i) => i !== key);
+    setProcrams(newData);
+  }
 
   return (
     <IonPage>
@@ -61,7 +71,7 @@ const MakeList = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton color="primary" defaultHref="/" />
+              <IonBackButton color="primary" defaultHref="/home" />
             </IonButtons>
             <IonButtons slot="end">
               <IonButton onClick={() => pushData()}>保存</IonButton>
@@ -76,7 +86,7 @@ const MakeList = () => {
           </IonToolbar>
         </IonHeader>
 
-        {programs.map((item, key) => {
+        {programs?.map((item, key) => {
           return (
             <IonItemSliding key={key}>
               <IonItem>
@@ -91,10 +101,7 @@ const MakeList = () => {
                 ></IonInput>
               </IonItem>
               <IonItemOptions side="end">
-                <IonItemOption
-                  color="danger"
-                  onClick={() => console.log("share clicked")}
-                >
+                <IonItemOption color="danger" onClick={() => delItem(key)}>
                   削除
                 </IonItemOption>
               </IonItemOptions>
