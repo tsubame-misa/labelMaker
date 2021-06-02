@@ -21,17 +21,39 @@ const MakeList = () => {
   const [programs, setProcrams] = useState([{ name: "" }]);
   const [labelName, setLabelName] = useState();
   const [data, setData] = useState([]);
+  const [lastId, setLastId] = useState(0);
+  const [id, setId] = useState(-1);
 
   useIonViewWillEnter(() => {
     const getData = JSON.parse(localStorage.getItem("data"));
     setData(getData);
+    const getLastId = localStorage.getItem("lastId");
+    function changeIDs(id) {
+      setLastId(Number(id) + Number(1));
+      setId(Number(id) + Number(1));
+    }
+    getLastId === null ? changeIDs(0) : changeIDs(getLastId);
   }, [data]);
 
   function pushData() {
-    const new_data = { label: labelName, i_list: programs };
-    data.push(new_data);
-    localStorage.setItem("data", JSON.stringify(data));
+    if (labelName === undefined) {
+      alert("ラベル名を入力してください");
+    }
+    const new_data = { id: lastId, label: labelName, i_list: programs };
+    if (data !== null) {
+      data.push(new_data);
+      localStorage.setItem("data", JSON.stringify(data));
+    } else {
+      console.log(new_data);
+      localStorage.setItem("data", JSON.stringify([new_data]));
+    }
+    setLastId(lastId);
+    console.log(lastId, "id =", id);
+    localStorage.setItem("lastId", lastId);
   }
+
+  console.log(lastId);
+  console.log(id);
 
   return (
     <IonPage>
