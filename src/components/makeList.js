@@ -12,11 +12,12 @@ import {
   IonBackButton,
   IonButtons,
   useIonViewWillEnter,
+  IonIcon,
 } from "@ionic/react";
-
 import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
+import { addOutline } from "ionicons/icons";
 
 const MakeList = () => {
   const { id } = useParams();
@@ -108,16 +109,18 @@ const MakeList = () => {
             </IonItemSliding>
           );
         })}
-
-        <IonButton
-          onClick={() => {
-            const newPrograms = Array.from(programs);
-            newPrograms.push({ name: "" });
-            setProcrams(newPrograms);
-          }}
-        >
-          ＋
-        </IonButton>
+        <div style={{ padding: "5px" }}>
+          <IonButton
+            fill="outline"
+            onClick={() => {
+              const newPrograms = Array.from(programs);
+              newPrograms.push({ name: "" });
+              setProcrams(newPrograms);
+            }}
+          >
+            <IonIcon icon={addOutline} />
+          </IonButton>
+        </div>
 
         <IonButton expand="block">ラベル印刷</IonButton>
       </IonContent>
