@@ -1,0 +1,8 @@
+ion-input {
+  --color: deeppink;
+  --font-size: 40px;
+  height: 150px;
+}
+input {
+  font-size: 40px;
+}
