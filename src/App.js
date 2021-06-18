@@ -4,6 +4,7 @@ import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
 import makeList from "./components/makeList";
 import ShowList from "./components/showList";
+import MakeQRcode from "./components/MakeQRcode";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -34,6 +35,7 @@ const App = () => (
         </Route>
         <Route exact path="/makeList/:id" component={makeList} />
         <Route exact path="/list/:id" component={ShowList} />
+        <Route exact path="/list/:id/qrcode" component={MakeQRcode} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

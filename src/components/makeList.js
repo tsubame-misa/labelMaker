@@ -19,7 +19,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { addOutline } from "ionicons/icons";
 
-const MakeList = () => {
+const MakeList = ({ history }) => {
   const { id } = useParams();
   const [programs, setProcrams] = useState([{ name: "" }]);
   const [labelName, setLabelName] = useState();
@@ -122,7 +122,16 @@ const MakeList = () => {
           </IonButton>
         </div>
 
-        <IonButton expand="block">ラベル印刷</IonButton>
+        <IonButton
+          color="primary"
+          expand="block"
+          onClick={() => {
+            pushData();
+            history.push(`/list/${id}/qrcode`);
+          }}
+        >
+          ラベル印刷
+        </IonButton>
       </IonContent>
     </IonPage>
   );
