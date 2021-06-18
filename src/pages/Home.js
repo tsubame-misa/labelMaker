@@ -48,7 +48,7 @@ const Home = ({ history }) => {
       <IonContent fullscreen>
         {data?.map((d, key) => {
           return (
-            <IonItemSliding key={key}>
+            <IonItemSliding key={d.id}>
               <IonItem routerLink={`/list/${data[key].id}`}>{d.label}</IonItem>
               <IonItemOptions>
                 <IonItemOption
