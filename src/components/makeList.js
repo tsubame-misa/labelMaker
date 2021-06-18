@@ -70,19 +70,20 @@ const MakeList = () => {
     <IonPage>
       <IonContent>
         <IonHeader>
-          <IonToolbar>
+          <IonToolbar class="Header">
             <IonButtons slot="start">
-              <IonBackButton color="primary" defaultHref="/home" />
+              <IonBackButton color="primary" defaultHref="/home" text="戻る" />
             </IonButtons>
             <IonButtons slot="end">
               <IonButton onClick={() => pushData()}>保存</IonButton>
             </IonButtons>
           </IonToolbar>
-          <IonToolbar>
+          <IonToolbar class="LabelName">
             <IonInput
               value={labelName}
               placeholder="ラベル名"
               onIonChange={(e) => setLabelName(e.detail.value)}
+              class="LabelName"
             ></IonInput>
           </IonToolbar>
         </IonHeader>
@@ -90,7 +91,7 @@ const MakeList = () => {
         {programs?.map((item, key) => {
           return (
             <IonItemSliding key={key}>
-              <IonItem>
+              <IonItem class="Item">
                 <IonInput
                   value={item.name}
                   placeholder="番組名"
@@ -111,14 +112,15 @@ const MakeList = () => {
         })}
         <div style={{ padding: "5px" }}>
           <IonButton
-            fill="outline"
+            fill="clear"
             onClick={() => {
               const newPrograms = Array.from(programs);
               newPrograms.push({ name: "" });
               setProcrams(newPrograms);
             }}
+            class="AddButton"
           >
-            <IonIcon icon={addOutline} />
+            <IonIcon icon={addOutline} color="primary" />
           </IonButton>
         </div>
 
