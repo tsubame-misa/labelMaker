@@ -44,7 +44,6 @@ const ShowList = () => {
         return item;
       }
     });
-    console.log(newData);
 
     localStorage.removeItem("data");
     localStorage.setItem("data", JSON.stringify(newData));
@@ -62,7 +61,9 @@ const ShowList = () => {
               <IonBackButton color="primary" defaultHref="/" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton expand="block">ラベル印刷</IonButton>
+              <IonButton expand="block" routerLink={`/list/${id}/qrcode`}>
+                ラベル印刷
+              </IonButton>
               <IonButton routerLink={`/makeList/${id}`}>編集</IonButton>
             </IonButtons>
           </IonToolbar>
