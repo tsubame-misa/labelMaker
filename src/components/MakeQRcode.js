@@ -35,7 +35,7 @@ const MakeQRcode = () => {
           <IonButtons slot="end"></IonButtons>
         </IonToolbar>
         <IonToolbar>
-          <IonTitle>LableMaker</IonTitle>
+          <IonTitle>LableMaker QRコード</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
