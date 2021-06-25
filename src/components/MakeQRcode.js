@@ -39,12 +39,12 @@ const MakeQRcode = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div>
+        <div className="QRcode">
           <img
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost:3000/list/${id}`}
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:3000/list/${id}`}
             alt="QRcode"
           ></img>
-          <p>{labelName}</p>
+          <p className="labelName">{labelName}</p>
         </div>
       </IonContent>
     </IonPage>
