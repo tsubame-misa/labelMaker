@@ -1,0 +1,17 @@
+.Header {
+  margin-top: 20px;
+  border-bottom: solid 1px rgb(72, 129, 247);
+}
+
+.LabelName {
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.Item {
+  padding-left: 20px;
+}
+
+.AddButton {
+  padding-left: 10px;
+}
