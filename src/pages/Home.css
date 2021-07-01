@@ -1,3 +1,13 @@
+
+div.QRcode {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.labelName {
+  text-align: center;
+}
+
 .Header {
   margin-top: 20px;
   border-bottom: solid 1px rgb(72, 129, 247);
