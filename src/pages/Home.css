@@ -13,6 +13,10 @@ div.QRcode {
   border-bottom: solid 1px rgb(72, 129, 247);
 }
 
+.HomeHeader {
+  margin-top: 10px;
+}
+
 .LabelName {
   font-weight: bold;
   padding-left: 20px;

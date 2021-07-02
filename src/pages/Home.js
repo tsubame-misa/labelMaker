@@ -41,8 +41,8 @@ const Home = ({ history }) => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>LableMaker</IonTitle>
+        <IonToolbar class="HomeHeader">
+          <IonTitle size="large">LableMaker</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

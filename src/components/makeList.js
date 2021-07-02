@@ -120,7 +120,7 @@ const MakeList = ({ history }) => {
             }}
             class="AddButton"
           >
-            <IonIcon icon={addOutline} color="primary" />
+            <IonIcon icon={addOutline} color="primary" size="small"/>
           </IonButton>
         </div>
 
