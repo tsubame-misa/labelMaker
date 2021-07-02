@@ -75,7 +75,9 @@ const MakeList = ({ history }) => {
               <IonBackButton color="primary" defaultHref="/home" text="戻る" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton onClick={() => pushData()}>保存</IonButton>
+              <IonButton onClick={() => pushData()} color="primary">
+                保存
+              </IonButton>
             </IonButtons>
           </IonToolbar>
           <IonToolbar class="LabelName">
