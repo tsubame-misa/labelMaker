@@ -12,6 +12,10 @@ div.QRcode {
   --padding-bottom: 40px;
 }
 
+.title-default {
+  font-size: 25px;
+}
+
 .LabelName {
   font-weight: bold;
   padding-left: 20px;
