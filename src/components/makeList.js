@@ -38,11 +38,24 @@ const MakeList = ({ history }) => {
   }, [data]);
 
   function pushData() {
-    if (labelName === undefined) {
+    const rmNothing = programs.filter((p) => p.name !== "");
+
+    if (
+      (labelName === undefined || labelName === "") &&
+      rmNothing.length === 0
+    ) {
+      alert("ラベル名とアイテム名を入力してください");
+      return 0;
+    } else if (labelName === undefined || labelName === "") {
       alert("ラベル名を入力してください");
       return 0;
+    } else if (rmNothing.length === 0) {
+      alert("アイテム名を入力してください");
+      return 0;
     }
-    const newData = { id: id, label: labelName, i_list: programs };
+
+    const newData = { id: id, label: labelName, i_list: rmNothing };
+
     if (data !== null) {
       let changed = false;
       for (const d of data) {
@@ -68,6 +81,12 @@ const MakeList = ({ history }) => {
   function delItem(key) {
     const newData = programs.filter((_, i) => i !== key);
     setProcrams(newData);
+  }
+
+  function addNewProgram() {
+    const newPrograms = Array.from(programs);
+    newPrograms.push({ name: "" });
+    setProcrams(newPrograms);
   }
 
   return (
@@ -120,9 +139,14 @@ const MakeList = ({ history }) => {
           <IonButton
             fill="clear"
             onClick={() => {
-              const newPrograms = Array.from(programs);
-              newPrograms.push({ name: "" });
-              setProcrams(newPrograms);
+              if (programs.length > 0) {
+                const preData = programs[programs.length - 1];
+                if (preData.name !== "") {
+                  addNewProgram();
+                }
+              } else {
+                addNewProgram();
+              }
             }}
             class="AddButton"
           >
