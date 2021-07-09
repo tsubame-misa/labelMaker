@@ -1,3 +1,7 @@
+* {
+  font-family: "Kosugi Maru", sans-serif;
+}
+
 div.QRcode {
   text-align: center;
   margin-top: 100px;
@@ -8,12 +12,14 @@ div.QRcode {
 }
 
 .toolbar-title-default {
-  --padding-top: 40px;
+  --padding-top: 30px;
   --padding-bottom: 40px;
 }
 
 .title-default {
   font-size: 25px;
+  color: white;
+  background-color: #f3a659;
 }
 
 .LabelName {
@@ -27,5 +33,5 @@ div.QRcode {
 }
 
 .AddButton {
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
