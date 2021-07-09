@@ -59,7 +59,7 @@ const Home = ({ history }) => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>LableMaker</IonTitle>
+          <IonTitle>Donuts</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -92,7 +92,7 @@ const Home = ({ history }) => {
               history.push(`/makeList/${nextId}`);
             }}
           >
-            <IonIcon icon={addOutline} />
+            <IonIcon icon={addOutline} size="20px" />
           </IonFabButton>
         </IonFab>
       </IonContent>

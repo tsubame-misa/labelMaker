@@ -1,20 +1,31 @@
+* {
+  font-family: "Kosugi Maru", sans-serif;
+}
+
 div.QRcode {
   text-align: center;
   margin-top: 100px;
 }
 
-.labelName {
-  text-align: center;
+.Header {
+  border-bottom: solid 1px #f0973f;
 }
 
-.Header {
-  margin-top: 20px;
-  border-bottom: solid 1px #f0973f;
+.toolbar-title-default {
+  --padding-top: 30px;
+  --padding-bottom: 40px;
+}
+
+.title-default {
+  font-size: 25px;
+  color: white;
+  background-color: #f3a659;
 }
 
 .LabelName {
   font-weight: bold;
   padding-left: 20px;
+  text-align: center;
 }
 
 .Item {
@@ -22,5 +33,5 @@ div.QRcode {
 }
 
 .AddButton {
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
