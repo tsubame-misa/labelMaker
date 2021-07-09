@@ -25,7 +25,7 @@ const ShowList = () => {
   useIonViewWillEnter(() => {
     const data = JSON.parse(localStorage.getItem("data"));
     for (const item of data) {
-      if (item.id === Number(id)) {
+      if (item.id === id) {
         setProcrams(item.i_list);
         setLabelName(item.label);
       }
