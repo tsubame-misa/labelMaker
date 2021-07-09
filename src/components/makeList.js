@@ -40,6 +40,7 @@ const MakeList = ({ history }) => {
   function pushData() {
     if (labelName === undefined) {
       alert("ラベル名を入力してください");
+      return 0;
     }
     const newData = { id: id, label: labelName, i_list: programs };
     if (data !== null) {
@@ -60,6 +61,8 @@ const MakeList = ({ history }) => {
     } else {
       localStorage.setItem("data", JSON.stringify([newData]));
     }
+
+    return 1;
   }
 
   function delItem(key) {
@@ -131,8 +134,10 @@ const MakeList = ({ history }) => {
           color="primary"
           expand="block"
           onClick={() => {
-            pushData();
-            history.push(`/list/${id}/qrcode`);
+            const saved = pushData();
+            if (saved) {
+              history.push(`/list/${id}/qrcode`);
+            }
           }}
         >
           ラベル印刷
