@@ -11,6 +11,7 @@ import {
   IonTitle,
   IonToolbar,
   IonItemSliding,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import { addOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
@@ -20,20 +21,36 @@ const Home = ({ history }) => {
   const [data, setData] = useState([]);
   const [nextId, setNextId] = useState();
 
-  useEffect(() => {
-    const getData = async () => {
+  useIonViewWillEnter(() => {
+    (async () => {
       const getData = await JSON.parse(localStorage.getItem("data"));
       setData(getData);
-    };
-    getData();
-    const getLastId = localStorage.getItem("lastId");
-    getLastId === null
-      ? setNextId(0)
-      : setNextId(Number(getLastId) + Number(1));
-  }, [data]);
+
+      let randomId = Math.floor(Math.random() * 10000);
+      let same = true;
+      if (getData) {
+        while (same) {
+          for (const d of getData) {
+            if (d.id !== randomId) {
+              same = false;
+            } else {
+              same = true;
+            }
+          }
+
+          if (same) {
+            randomId = Math.floor(Math.random() * 10000);
+          }
+        }
+      }
+      setNextId(randomId);
+    })();
+  });
+
+  useEffect(() => {});
 
   function delItem(id) {
-    const newData = data.filter((_, key) => key !== id);
+    const newData = data.filter((d) => d.id !== id);
     localStorage.removeItem("data");
     localStorage.setItem("data", JSON.stringify(newData));
   }
@@ -54,8 +71,12 @@ const Home = ({ history }) => {
                 <IonItemOption
                   color="danger"
                   expandable
-                  onClick={() => {
-                    delItem(key);
+                  onClick={async () => {
+                    await delItem(d.id);
+                    const newData = await await JSON.parse(
+                      localStorage.getItem("data")
+                    );
+                    setData(newData);
                   }}
                 >
                   delete

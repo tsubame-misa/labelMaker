@@ -21,44 +21,26 @@ import { addOutline } from "ionicons/icons";
 
 const MakeList = ({ history }) => {
   const { id } = useParams();
-  const [programs, setProcrams] = useState([{ name: "" }]);
+  const [programs, setProcrams] = useState([]);
   const [labelName, setLabelName] = useState();
   const [data, setData] = useState([]);
-  const [lastId, setLastId] = useState(0);
-  const [p_id, setId] = useState(-1);
 
   useIonViewWillEnter(() => {
-    const getData = JSON.parse(localStorage.getItem("data")) || [{ name: "" }];
+    const getData = JSON.parse(localStorage.getItem("data"));
     setData(getData);
-    const getLastId = localStorage.getItem("lastId");
-    function changeIDs(p_id) {
-      setLastId(Number(p_id) + Number(1));
-      setId(Number(p_id) + Number(1));
-      if (id <= p_id) {
-        for (const item of getData) {
-          if (item.id === Number(id)) {
-            setProcrams(item.i_list);
-            setLabelName(item.label);
-          }
-        }
-      }
-    }
-    getLastId === null ? changeIDs(0) : changeIDs(getLastId);
   }, [data]);
 
   function pushData() {
     if (labelName === undefined) {
       alert("ラベル名を入力してください");
     }
-    const new_data = { id: lastId, label: labelName, i_list: programs };
+    const new_data = { id: id, label: labelName, i_list: programs };
     if (data !== null) {
       data.push(new_data);
       localStorage.setItem("data", JSON.stringify(data));
     } else {
       localStorage.setItem("data", JSON.stringify([new_data]));
     }
-    setLastId(lastId);
-    localStorage.setItem("lastId", lastId);
   }
 
   function delItem(key) {
