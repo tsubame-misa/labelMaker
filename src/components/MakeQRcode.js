@@ -7,10 +7,12 @@ import {
   IonButtons,
   useIonViewWillEnter,
   IonTitle,
+  IonImg,
 } from "@ionic/react";
 import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
+import img from "./panda.PNG";
 
 const MakeQRcode = () => {
   const { id } = useParams();
@@ -19,7 +21,7 @@ const MakeQRcode = () => {
   useIonViewWillEnter(() => {
     const getData = JSON.parse(localStorage.getItem("data")) || [{ name: "" }];
     for (const item of getData) {
-      if (item.id === Number(id)) {
+      if (item.id === id) {
         setLabelName(item.label);
       }
     }
@@ -41,11 +43,17 @@ const MakeQRcode = () => {
       <IonContent>
         <div className="QRcode">
           <img
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:3000/list/${id}`}
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`}
             alt="QRcode"
           ></img>
-          <p className="labelName">{labelName}</p>
+          <p
+            className="labelName"
+            style={{ fontSize: "1.5rem", margin: "3px" }}
+          >
+            {labelName}
+          </p>
         </div>
+        {/*} <IonImg src={img}></IonImg>*/}
       </IonContent>
     </IonPage>
   );
