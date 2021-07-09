@@ -74,7 +74,7 @@ const ShowList = () => {
 
         {programs?.map((item, key) => {
           return (
-            <IonItemSliding key={key}>
+            <IonItemSliding key={item.id}>
               <IonItem>{item.name}</IonItem>
               <IonItemOptions side="end">
                 <IonItemOption color="danger" onClick={() => delItem(key)}>

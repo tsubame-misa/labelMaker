@@ -28,11 +28,12 @@ const MakeList = ({ history }) => {
   useIonViewWillEnter(() => {
     const getData = JSON.parse(localStorage.getItem("data"));
     setData(getData);
-
-    for (const item of getData) {
-      if (item.id === id) {
-        setProcrams(item.i_list);
-        setLabelName(item.label);
+    if (getData !== null) {
+      for (const item of getData) {
+        if (item.id === id) {
+          setProcrams(item.i_list);
+          setLabelName(item.label);
+        }
       }
     }
   }, [data]);
@@ -84,8 +85,24 @@ const MakeList = ({ history }) => {
   }
 
   function addNewProgram() {
+    let randomId = Math.floor(Math.random() * 1000);
+    let same = true;
+    if (programs.length > 0) {
+      while (same) {
+        for (const d of programs) {
+          if (d.id !== randomId) {
+            same = false;
+          } else {
+            same = true;
+          }
+        }
+        if (same) {
+          randomId = Math.floor(Math.random() * 1000);
+        }
+      }
+    }
     const newPrograms = Array.from(programs);
-    newPrograms.push({ name: "" });
+    newPrograms.push({ id: randomId, name: "" });
     setProcrams(newPrograms);
   }
 
@@ -115,7 +132,7 @@ const MakeList = ({ history }) => {
 
         {programs?.map((item, key) => {
           return (
-            <IonItemSliding key={key}>
+            <IonItemSliding key={item.id}>
               <IonItem class="Item">
                 <IonInput
                   value={item.name}

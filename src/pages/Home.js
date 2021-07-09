@@ -28,7 +28,7 @@ const Home = ({ history }) => {
 
       let randomId = Math.floor(Math.random() * 10000);
       let same = true;
-      if (getData) {
+      if (getData !== null) {
         while (same) {
           for (const d of getData) {
             if (d.id !== randomId) {
