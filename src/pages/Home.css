@@ -2,9 +2,10 @@
   font-family: "Kosugi Maru", sans-serif;
 }
 
-div.QRcode {
+.QRcode {
   text-align: center;
   margin-top: 100px;
+  -webkit-touch-callout: default;
 }
 
 .Header {
@@ -30,8 +31,4 @@ div.QRcode {
 
 .Item {
   padding-left: 15px;
-}
-
-.AddButton {
-  /* padding-left: 10px; */
 }
