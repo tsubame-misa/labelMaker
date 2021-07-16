@@ -5,6 +5,7 @@ import {
   IonToolbar,
   IonBackButton,
   IonButtons,
+  IonLoading, 
   useIonViewWillEnter,
   IonTitle,
 } from "@ionic/react";
@@ -15,6 +16,11 @@ import { useParams } from "react-router";
 const MakeQRcode = () => {
   const { id } = useParams();
   const [labelName, setLabelName] = useState();
+  const [showLoading, setShowLoading] = useState(true);
+
+  setTimeout(() => {
+    setShowLoading(false);
+  }, 2000);
 
   useIonViewWillEnter(() => {
     const getData = JSON.parse(localStorage.getItem("data")) || [{ name: "" }];
@@ -39,6 +45,13 @@ const MakeQRcode = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <IonLoading
+          cssClass='my-custom-class'
+          isOpen={showLoading}
+          onDidDismiss={() => setShowLoading(false)}
+          message={'Please wait...'}
+          duration={1200}
+        />
         <div className="QRcode">
           <figure>
             <img
