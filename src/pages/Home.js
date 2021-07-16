@@ -12,6 +12,7 @@ import {
   IonToolbar,
   IonItemSliding,
   useIonViewWillEnter,
+  IonSearchbar,
 } from "@ionic/react";
 import { addOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
@@ -20,6 +21,7 @@ import "./Home.css";
 const Home = ({ history }) => {
   const [data, setData] = useState([]);
   const [nextId, setNextId] = useState();
+  const [searchText, setSearchText] = useState("");
 
   useIonViewWillEnter(() => {
     (async () => {
@@ -47,12 +49,43 @@ const Home = ({ history }) => {
     })();
   });
 
-  useEffect(() => {});
-
   function delItem(id) {
     const newData = data.filter((d) => d.id !== id);
     localStorage.removeItem("data");
     localStorage.setItem("data", JSON.stringify(newData));
+  }
+
+  function findWord(item, word) {
+    const find = item.label.indexOf(`${word}`);
+    if (find !== -1) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  async function SearchData(search, word) {
+    if (search && (word === "" || word === undefined)) {
+      return;
+    }
+
+    for (const d of data) {
+      console.log(d.label, d.label.indexOf(word));
+    }
+
+    const allData = await await JSON.parse(localStorage.getItem("data"));
+    const newData = allData.filter((item) => findWord(item, word));
+
+    if (search) {
+      if (newData.length > 0) {
+        setData(newData);
+      } else {
+        setData([]);
+      }
+    }
+    if (!search) {
+      setData(allData);
+    }
   }
 
   return (
@@ -63,6 +96,12 @@ const Home = ({ history }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonSearchbar
+          value={searchText}
+          showCancelButton="focus"
+          onIonCancel={() => SearchData(false)}
+          onIonChange={(e) => SearchData(true, e.detail.value)}
+        ></IonSearchbar>
         {data?.map((d, key) => {
           return (
             <IonItemSliding key={d.id}>
