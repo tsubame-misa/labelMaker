@@ -14,7 +14,7 @@ import {
   useIonViewWillEnter,
   IonSearchbar,
 } from "@ionic/react";
-import { addOutline } from "ionicons/icons";
+import { addOutline, search } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import "./Home.css";
 
@@ -22,6 +22,8 @@ const Home = ({ history }) => {
   const [data, setData] = useState([]);
   const [nextId, setNextId] = useState();
   const [searchText, setSearchText] = useState("");
+  const [serch, setSearch] = useState(false);
+  const [itemData, setItemData] = useState([]);
 
   useIonViewWillEnter(() => {
     (async () => {
@@ -49,6 +51,8 @@ const Home = ({ history }) => {
     })();
   });
 
+  //useEffect(() => {}, [search]);
+
   function delItem(id) {
     const newData = data.filter((d) => d.id !== id);
     localStorage.removeItem("data");
@@ -56,7 +60,8 @@ const Home = ({ history }) => {
   }
 
   function findWord(item, word) {
-    const find = item.label.indexOf(`${word}`);
+    console.log(item);
+    const find = item.indexOf(`${word}`);
     if (find !== -1) {
       return 1;
     } else {
@@ -69,12 +74,17 @@ const Home = ({ history }) => {
       return;
     }
 
-    for (const d of data) {
-      console.log(d.label, d.label.indexOf(word));
-    }
-
     const allData = await await JSON.parse(localStorage.getItem("data"));
-    const newData = allData.filter((item) => findWord(item, word));
+    const newData = allData.filter((item) => findWord(item.label, word));
+    const newItemData = [];
+    for (const label of allData) {
+      for (const item of label.i_list) {
+        if (findWord(item.name, word)) {
+          newItemData.push({ label: label, item: item });
+        }
+      }
+    }
+    console.log("new", newItemData);
 
     if (search) {
       if (newData.length > 0) {
@@ -82,11 +92,21 @@ const Home = ({ history }) => {
       } else {
         setData([]);
       }
+      if (newItemData.length > 0) {
+        setItemData(newItemData);
+      } else {
+        setItemData([]);
+      }
     }
+
     if (!search) {
+      setSearch(!search);
       setData(allData);
+      setItemData([]);
     }
   }
+
+  //console.log(serch);
 
   return (
     <IonPage>
@@ -100,30 +120,68 @@ const Home = ({ history }) => {
           value={searchText}
           showCancelButton="focus"
           onIonCancel={() => SearchData(false)}
-          onIonChange={(e) => SearchData(true, e.detail.value)}
+          onIonChange={(e) => {
+            setSearch(!search);
+            SearchData(true, e.detail.value);
+          }}
         ></IonSearchbar>
-        {data?.map((d, key) => {
-          return (
-            <IonItemSliding key={d.id}>
-              <IonItem routerLink={`/list/${data[key].id}`}>{d.label}</IonItem>
-              <IonItemOptions>
-                <IonItemOption
-                  color="danger"
-                  expandable
-                  onClick={async () => {
-                    await delItem(d.id);
-                    const newData = await await JSON.parse(
-                      localStorage.getItem("data")
-                    );
-                    setData(newData);
-                  }}
-                >
-                  delete
-                </IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-          );
-        })}
+        {!searchText ? (
+          <div>
+            {data?.map((d, key) => {
+              return (
+                <IonItemSliding key={d.id}>
+                  <IonItem routerLink={`/list/${data[key].id}`}>
+                    {d.label}
+                  </IonItem>
+                  <IonItemOptions>
+                    <IonItemOption
+                      color="danger"
+                      expandable
+                      onClick={async () => {
+                        await delItem(d.id);
+                        const newData = await await JSON.parse(
+                          localStorage.getItem("data")
+                        );
+                        setData(newData);
+                      }}
+                    >
+                      delete
+                    </IonItemOption>
+                  </IonItemOptions>
+                </IonItemSliding>
+              );
+            })}
+            {itemData?.map((d, key) => {
+              console.log(d);
+              return (
+                <IonItemSliding key={"0" + d.label.id + String(d.item.id)}>
+                  <IonItem routerLink={`/list/${d.label.id}`}>
+                    {d.label.label} &ensp;
+                    <b>{d.item.name}</b>
+                  </IonItem>
+                  {/*<IonItemOptions>
+                    <IonItemOption
+                      color="danger"
+                      expandable
+                      onClick={async () => {
+                        await delItem(d.id);
+                        const newData = await await JSON.parse(
+                          localStorage.getItem("data")
+                        );
+                        setData(newData);
+                      }}
+                    >
+                      delete
+                    </IonItemOption>
+                    </IonItemOptions>*/}
+                </IonItemSliding>
+              );
+            })}
+          </div>
+        ) : (
+          /*<div>普通</div>*/
+          <div>探す</div>
+        )}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton
             color="primary"
@@ -138,5 +196,4 @@ const Home = ({ history }) => {
     </IonPage>
   );
 };
-
 export default Home;
