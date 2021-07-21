@@ -61,10 +61,16 @@ const ShowList = () => {
               <IonBackButton color="primary" defaultHref="/" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton expand="block" routerLink={`/list/${id}/qrcode`}>
+              <IonButton
+                expand="block"
+                routerLink={`/list/${id}/qrcode`}
+                color="primary"
+              >
                 ラベル印刷
               </IonButton>
-              <IonButton routerLink={`/makeList/${id}`}>編集</IonButton>
+              <IonButton routerLink={`/makeList/${id}`} color="primary">
+                編集
+              </IonButton>
             </IonButtons>
           </IonToolbar>
           <IonToolbar>

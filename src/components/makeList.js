@@ -14,6 +14,7 @@ import {
   useIonViewWillEnter,
   IonIcon,
 } from "@ionic/react";
+/**TODO:Home.cssじゃなくす */
 import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
@@ -114,9 +115,23 @@ const MakeList = ({ history }) => {
             <IonButtons slot="start">
               <IonBackButton color="primary" defaultHref="/home" text="戻る" />
             </IonButtons>
-            <IonButtons slot="end">
+            {/*} <IonButtons slot="end">
               <IonButton onClick={() => pushData()} color="primary">
                 保存
+              </IonButton>
+  </IonButtons>*/}
+            <IonButtons slot="end">
+              <IonButton
+                expand="block"
+                onClick={() => {
+                  const saved = pushData();
+                  if (saved) {
+                    history.push(`/list/${id}/qrcode`);
+                  }
+                }}
+                color="primary"
+              >
+                ラベル印刷
               </IonButton>
             </IonButtons>
           </IonToolbar>
@@ -136,7 +151,7 @@ const MakeList = ({ history }) => {
               <IonItem class="Item">
                 <IonInput
                   value={item.name}
-                  placeholder="番組名"
+                  placeholder="アイテム名"
                   onIonChange={(e) => {
                     const newPrograms = Array.from(programs);
                     newPrograms[key].name = e.detail.value;
@@ -170,19 +185,6 @@ const MakeList = ({ history }) => {
             <IonIcon icon={addOutline} color="primary" />
           </IonButton>
         </div>
-
-        <IonButton
-          color="primary"
-          expand="block"
-          onClick={() => {
-            const saved = pushData();
-            if (saved) {
-              history.push(`/list/${id}/qrcode`);
-            }
-          }}
-        >
-          ラベル印刷
-        </IonButton>
       </IonContent>
     </IonPage>
   );
