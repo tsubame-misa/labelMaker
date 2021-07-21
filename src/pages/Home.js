@@ -48,10 +48,9 @@ const Home = ({ history }) => {
         }
       }
       setNextId(randomId);
+      setItemData([]);
     })();
   });
-
-  //useEffect(() => {}, [search]);
 
   function delItem(id) {
     const newData = data.filter((d) => d.id !== id);
@@ -60,7 +59,6 @@ const Home = ({ history }) => {
   }
 
   function findWord(item, word) {
-    console.log(item);
     const find = item.indexOf(`${word}`);
     if (find !== -1) {
       return 1;
@@ -84,7 +82,6 @@ const Home = ({ history }) => {
         }
       }
     }
-    console.log("new", newItemData);
 
     if (search) {
       if (newData.length > 0) {
@@ -152,29 +149,14 @@ const Home = ({ history }) => {
               );
             })}
             {itemData?.map((d, key) => {
-              console.log(d);
               return (
-                <IonItemSliding key={"0" + d.label.id + String(d.item.id)}>
-                  <IonItem routerLink={`/list/${d.label.id}`}>
-                    {d.label.label} &ensp;
-                    <b>{d.item.name}</b>
-                  </IonItem>
-                  {/*<IonItemOptions>
-                    <IonItemOption
-                      color="danger"
-                      expandable
-                      onClick={async () => {
-                        await delItem(d.id);
-                        const newData = await await JSON.parse(
-                          localStorage.getItem("data")
-                        );
-                        setData(newData);
-                      }}
-                    >
-                      delete
-                    </IonItemOption>
-                    </IonItemOptions>*/}
-                </IonItemSliding>
+                <IonItem
+                  routerLink={`/list/${d.label.id}`}
+                  key={"0" + d.label.id + String(d.item.id)}
+                >
+                  {d.label.label} &ensp;
+                  <b>{d.item.name}</b>
+                </IonItem>
               );
             })}
           </div>
