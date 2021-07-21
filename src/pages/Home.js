@@ -13,6 +13,7 @@ import {
   IonItemSliding,
   useIonViewWillEnter,
   IonSearchbar,
+  IonItemDivider,
 } from "@ionic/react";
 import { addOutline, search } from "ionicons/icons";
 import { useEffect, useState } from "react";
@@ -24,6 +25,7 @@ const Home = ({ history }) => {
   const [searchText, setSearchText] = useState("");
   const [serch, setSearch] = useState(false);
   const [itemData, setItemData] = useState([]);
+  const [searchItem, setSearchItem] = useState([]);
 
   useIonViewWillEnter(() => {
     (async () => {
@@ -86,6 +88,7 @@ const Home = ({ history }) => {
     if (search) {
       if (newData.length > 0) {
         setData(newData);
+        setSearchItem(newData);
       } else {
         setData([]);
       }
@@ -99,11 +102,10 @@ const Home = ({ history }) => {
     if (!search) {
       setSearch(!search);
       setData(allData);
+      setSearchItem([]);
       setItemData([]);
     }
   }
-
-  //console.log(serch);
 
   return (
     <IonPage>
@@ -122,48 +124,56 @@ const Home = ({ history }) => {
             SearchData(true, e.detail.value);
           }}
         ></IonSearchbar>
-        {!searchText ? (
-          <div>
-            {data?.map((d, key) => {
-              return (
-                <IonItemSliding key={d.id}>
-                  <IonItem routerLink={`/list/${data[key].id}`}>
-                    {d.label}
-                  </IonItem>
-                  <IonItemOptions>
-                    <IonItemOption
-                      color="danger"
-                      expandable
-                      onClick={async () => {
-                        await delItem(d.id);
-                        const newData = await await JSON.parse(
-                          localStorage.getItem("data")
-                        );
-                        setData(newData);
-                      }}
-                    >
-                      delete
-                    </IonItemOption>
-                  </IonItemOptions>
-                </IonItemSliding>
-              );
-            })}
-            {itemData?.map((d, key) => {
-              return (
-                <IonItem
-                  routerLink={`/list/${d.label.id}`}
-                  key={"0" + d.label.id + String(d.item.id)}
-                >
-                  {d.label.label} &ensp;
-                  <b>{d.item.name}</b>
+
+        {/**TODO:サーチ有無でコンポーメント分ける */}
+        <div>
+          {searchItem.length > 0 ? (
+            <IonItemDivider color="light">ラベル</IonItemDivider>
+          ) : (
+            []
+          )}
+          {data?.map((d, key) => {
+            return (
+              <IonItemSliding key={d.id}>
+                <IonItem routerLink={`/list/${data[key].id}`}>
+                  {d.label}
                 </IonItem>
-              );
-            })}
-          </div>
-        ) : (
-          /*<div>普通</div>*/
-          <div>探す</div>
-        )}
+                <IonItemOptions>
+                  <IonItemOption
+                    color="danger"
+                    expandable
+                    onClick={async () => {
+                      await delItem(d.id);
+                      const newData = await await JSON.parse(
+                        localStorage.getItem("data")
+                      );
+                      setData(newData);
+                    }}
+                  >
+                    delete
+                  </IonItemOption>
+                </IonItemOptions>
+              </IonItemSliding>
+            );
+          })}
+          {itemData.length > 0 ? (
+            <IonItemDivider color="light">アイテム</IonItemDivider>
+          ) : (
+            []
+          )}
+          {itemData?.map((d) => {
+            return (
+              <IonItem
+                routerLink={`/list/${d.label.id}`}
+                key={"0" + d.label.id + String(d.item.id)}
+              >
+                {d.label.label} &ensp;
+                <b>{d.item.name}</b>
+              </IonItem>
+            );
+          })}
+        </div>
+
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton
             color="primary"
