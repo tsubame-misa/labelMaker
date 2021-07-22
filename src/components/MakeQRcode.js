@@ -6,7 +6,6 @@ import {
   IonBackButton,
   IonButtons,
   useIonViewWillEnter,
-  IonTitle,
 } from "@ionic/react";
 import "../pages/Home.css";
 import { useState } from "react";
@@ -30,12 +29,9 @@ const MakeQRcode = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton color="primary" defaultHref="/home" />
+            <IonBackButton color="primary" defaultHref="/home" text="戻る" />
           </IonButtons>
           <IonButtons slot="end"></IonButtons>
-        </IonToolbar>
-        <IonToolbar>
-          <IonTitle>LableMaker QRコード</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>

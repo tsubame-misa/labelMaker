@@ -58,7 +58,7 @@ const ShowList = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton color="primary" defaultHref="/" />
+              <IonBackButton color="primary" defaultHref="/" text="戻る" />
             </IonButtons>
             <IonButtons slot="end">
               <IonButton
