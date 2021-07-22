@@ -32,3 +32,19 @@
 .Item {
   padding-left: 15px;
 }
+/*
+img {
+  -webkit-touch-callout: default;
+}
+canvas {
+  -webkit-touch-callout: default;
+}
+
+.test {
+  -webkit-touch-callout: default;
+}
+
+div {
+  -webkit-touch-callout: default
+}
+*/

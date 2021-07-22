@@ -17,6 +17,7 @@ import {
 } from "@ionic/react";
 import { addOutline, search } from "ionicons/icons";
 import { useEffect, useState } from "react";
+import Guide from "./Guido";
 import "./Home.css";
 
 const Home = ({ history }) => {
@@ -105,6 +106,18 @@ const Home = ({ history }) => {
       setSearchItem([]);
       setItemData([]);
     }
+  }
+
+  function logined() {
+    if ("visited" in localStorage) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  if (logined() === false) {
+    return <Guide modal={true} />;
   }
 
   return (
