@@ -22,7 +22,7 @@ import { addOutline } from "ionicons/icons";
 
 const MakeList = ({ history }) => {
   const { id } = useParams();
-  const [programs, setProcrams] = useState([]);
+  const [programs, setProcrams] = useState([{ id: 0, name: "" }]);
   const [labelName, setLabelName] = useState();
   const [data, setData] = useState([]);
 
@@ -46,15 +46,16 @@ const MakeList = ({ history }) => {
       (labelName === undefined || labelName === "") &&
       rmNothing.length === 0
     ) {
-      alert("ラベル名とアイテム名を入力してください");
+      //alert("ラベル名とアイテム名を入力してください");
       return 0;
-    } else if (labelName === undefined || labelName === "") {
+    }
+    /*} else if (labelName === undefined || labelName === "") {
       alert("ラベル名を入力してください");
       return 0;
     } else if (rmNothing.length === 0) {
       alert("アイテム名を入力してください");
       return 0;
-    }
+    }*/
 
     const newData = { id: id, label: labelName, i_list: rmNothing };
 
@@ -140,7 +141,8 @@ const MakeList = ({ history }) => {
               value={labelName}
               placeholder="ラベル名"
               onIonChange={(e) => setLabelName(e.detail.value)}
-              class="LabelName"
+              className="LabelName"
+              onBlur={() => pushData()}
             ></IonInput>
           </IonToolbar>
         </IonHeader>
@@ -157,6 +159,7 @@ const MakeList = ({ history }) => {
                     newPrograms[key].name = e.detail.value;
                     setProcrams(newPrograms);
                   }}
+                  onBlur={() => pushData()}
                 ></IonInput>
               </IonItem>
               <IonItemOptions side="end">
