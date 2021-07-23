@@ -7,6 +7,9 @@
   display: flex;
   justify-content: center;
 }
+.test {
+  width: 50%;
+}
 
 .Header {
   border-bottom: solid 1px #f0973f;
@@ -33,6 +36,13 @@
   padding-left: 15px;
 }
 
+.test2 {
+  font-size: 1.4rem;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+}
+
 @page pagename {
   size: A4 portrait;
   margin: 10px;
@@ -43,12 +53,21 @@
   }
   .QRcode {
     text-align: initial;
-    margin-top: 0px;
     display: initial;
     justify-content: center;
   }
+  .test {
+    width: 30%;
+  }
+  .test2 {
+    font-size: 1rem;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+  }
   img {
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
   }
   .no-print {
     display: none;

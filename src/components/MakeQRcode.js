@@ -38,16 +38,12 @@ const MakeQRcode = () => {
       </IonHeader>
       <IonContent>
         <div className="QRcode">
-          <div style={{ width: "50%" }}>
+          <div className="test">
             <img
               src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`}
               alt=""
             />
-            <p
-              style={{ textAlign: "center", margin: "0px", fontSize: "1.4rem" }}
-            >
-              {labelName}
-            </p>
+            <p className="test2">{labelName}</p>
           </div>
         </div>
       </IonContent>
