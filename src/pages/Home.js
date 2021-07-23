@@ -62,11 +62,13 @@ const Home = ({ history }) => {
   }
 
   function findWord(item, word) {
-    const find = item.indexOf(`${word}`);
-    if (find !== -1) {
-      return 1;
-    } else {
-      return 0;
+    if (item) {
+      const find = item.indexOf(`${word}`);
+      if (find !== -1) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
   }
 
