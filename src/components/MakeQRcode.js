@@ -11,6 +11,7 @@ import "../pages/Home.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import img from "./panda.PNG";
+import img2 from "../images/P1.png";
 import QRCode from "qrcode.react";
 
 const MakeQRcode = () => {
@@ -30,14 +31,6 @@ const MakeQRcode = () => {
 
   const width = 200;
   const height = 200;
-  function loadImage(src) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = (e) => reject(e);
-      img.src = src;
-    });
-  }
 
   useEffect(() => {
     (async () => {
@@ -46,50 +39,53 @@ const MakeQRcode = () => {
       );
       console.log(res);
 
-      /*fetch(
+      fetch(
         `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`
       )
         .then(function (response) {
-          return response.blob();
+          // 画像読み込み
+          const board = document.querySelector("#board"); //getElementById()等でも可。オブジェクトが取れれば良い。
+          /*const canvasElem = document.createElement("canvas");
+          canvasElem.width = width;
+          canvasElem.height = height;
+          const ctx2 = canvasElem.getContext("2d");*/
+          const ctx2 = board.getContext("2d");
+
+          if (labelName) {
+            ctx2.font = "20pt Arial";
+            ctx2.textAlign = "center";
+            ctx2.textBaseline = "ideographic";
+            ctx2.fillStyle = "rgba(0)";
+            ctx2.fillText(labelName, width / 2, height); // 座標 (20, 50) にテキスト描画
+          }
+
+          const chara = new Image();
+          chara.src = img2; // 画像のURLを指定
+          //console.log(response);
+          //chara.src = response.url; //`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`;
+
+          chara.onload = () => {
+            ctx2.drawImage(
+              chara,
+              0,
+              0,
+              width,
+              height,
+              (width * (1 - 0.85)) / 2,
+              0,
+              width * 0.85,
+              height * 0.85
+            );
+          };
+
+          setPng(board.toDataURL());
+          //setPng(canvasElem.toDataURL());
         })
         .then(function (blob) {
-          console.log(blob);
+          //  console.log(blob);
           // setPng(blob);
           // here the image is a blob
-        });*/
-
-      // 画像読み込み
-      const board = document.querySelector("#board"); //getElementById()等でも可。オブジェクトが取れれば良い。
-      const ctx2 = board.getContext("2d");
-
-      if (labelName) {
-        ctx2.font = "20pt Arial";
-        ctx2.textAlign = "center";
-        ctx2.textBaseline = "ideographic";
-        ctx2.fillStyle = "rgba(0)";
-        ctx2.fillText(labelName, width / 2, height); // 座標 (20, 50) にテキスト描画
-      }
-
-      const chara = new Image();
-      //chara.src = img; // 画像のURLを指定
-      chara.src = res.url; //`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`;
-
-      chara.onload = () => {
-        ctx2.drawImage(
-          chara,
-          0,
-          0,
-          width,
-          height,
-          (width * (1 - 0.85)) / 2,
-          0,
-          width * 0.85,
-          height * 0.85
-        );
-      };
-      console.log(board.toDataURL());
-
-      //setPng(board.toDataURL());
+        });
     })();
 
     /*const canvasElem = document.createElement("canvas");
@@ -115,11 +111,11 @@ const MakeQRcode = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="QRcode">
+        <div>
           <canvas id="board" width="200" height="200"></canvas>
         </div>
 
-        <div className="QRcode">
+        {/* <div>
           <figure>
             <img
               src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`}
@@ -128,7 +124,7 @@ const MakeQRcode = () => {
             />
             <figcaption> {labelName}</figcaption>
           </figure>
-        </div>
+       </div>*/}
 
         <div>
           {png && (
