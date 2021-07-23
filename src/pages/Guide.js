@@ -39,7 +39,7 @@ const Guide = ({ modal, history }) => {
           options={{ initialSlide: 0 }}
           style={{ height: "100%" }}
         >
-          <Slide0 />
+          {modal ? <Slide0 /> : []}
           <Slide1 />
           <Slide2 />
           <Slide3 />
