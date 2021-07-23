@@ -28,7 +28,7 @@ const MakeQRcode = () => {
   }, [labelName]);
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="no-print">
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton color="primary" defaultHref="/home" text="戻る" />
