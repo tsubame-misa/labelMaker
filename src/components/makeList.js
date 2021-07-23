@@ -115,7 +115,7 @@ const MakeList = ({ history }) => {
         <IonHeader>
           <IonToolbar class="Header">
             <IonButtons slot="start">
-              <IonBackButton color="primary" defaultHref="/home" text="戻る" />
+              <IonBackButton defaultHref="/home" text="戻る" />
             </IonButtons>
             <IonButtons slot="end">
               <IonButton
@@ -126,7 +126,6 @@ const MakeList = ({ history }) => {
                     history.push(`/list/${id}/qrcode`);
                   }
                 }}
-                color="primary"
               >
                 ラベル印刷
               </IonButton>

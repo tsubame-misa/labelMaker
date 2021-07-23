@@ -125,7 +125,7 @@ const Home = ({ history }) => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar class="HToolbar">
           <IonTitle>Donuts</IonTitle>
         </IonToolbar>
       </IonHeader>
