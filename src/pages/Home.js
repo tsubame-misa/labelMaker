@@ -17,8 +17,8 @@ import {
   IonButton,
   IonButtons,
 } from "@ionic/react";
-import { addOutline, search, helpCircleOutline } from "ionicons/icons";
-import { useEffect, useState } from "react";
+import { addOutline, search, helpOutline } from "ionicons/icons";
+import { useState } from "react";
 import Guide from "./Guide";
 import "./Home.css";
 
@@ -129,16 +129,15 @@ const Home = ({ history }) => {
       <IonHeader>
         <IonToolbar class="Header">
           <IonTitle>Donuts</IonTitle>
-          <IonButtons slot="end">
+          <IonButtons slot="start" style={{ marginLeft: "10px" }}>
             <IonButton
-              //color="dark"
-              size="large"
-              //fill="outline"
+              fill="outline"
+              strong={true}
               onClick={() => {
                 history.push("/setting/guide");
               }}
             >
-              <IonIcon icon={helpCircleOutline} />
+              <IonIcon icon={helpOutline} />
             </IonButton>
           </IonButtons>
         </IonToolbar>
