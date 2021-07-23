@@ -56,18 +56,23 @@ const ShowList = () => {
     <IonPage>
       <IonContent>
         <IonHeader>
-          <IonToolbar>
+          <IonToolbar class="Header">
             <IonButtons slot="start">
-              <IonBackButton color="primary" defaultHref="/" />
+              <IonBackButton defaultHref="/" text="戻る" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton expand="block" routerLink={`/list/${id}/qrcode`}>
+              <IonButton routerLink={`/makeList/${id}`} >
+                編集
+              </IonButton>
+              <IonButton
+                expand="block"
+                routerLink={`/list/${id}/qrcode`}
+              >
                 ラベル印刷
               </IonButton>
-              <IonButton routerLink={`/makeList/${id}`}>編集</IonButton>
             </IonButtons>
           </IonToolbar>
-          <IonToolbar>
+          <IonToolbar class="Label">
             <IonItem lines="none">{labelName}</IonItem>
           </IonToolbar>
         </IonHeader>

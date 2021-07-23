@@ -3,14 +3,31 @@
 }
 
 .QRcode {
-  text-align: center;
   margin-top: 100px;
-  -webkit-touch-callout: default;
+  display: flex;
+  justify-content: center;
+}
+.test {
+  width: 50%;
 }
 
 .Header {
-  border-bottom: solid 1px #f0973f;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  font-size: 25px; 
+  --ion-toolbar-color : white;
+  --ion-toolbar-background: #f3a659;
+  /*border-bottom: solid 1px #f0973f;*/
 }
+/*
+.HToolbar {
+  --padding-top: 15px;
+  --padding-bottom: 15px;
+  font-size: 25px; 
+  --ion-toolbar-color : white;
+  --ion-toolbar-background: #f3a659;
+}
+*/
 
 .toolbar-title-default {
   --padding-top: 30px;
@@ -27,7 +44,47 @@
   font-weight: bold;
   padding-left: 20px;
 }
-
+.Label {
+  font-weight: bold;
+}
 .Item {
   padding-left: 15px;
+}
+
+.test2 {
+  font-size: 1.4rem;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+@page pagename {
+  size: A4 portrait;
+  margin: 10px;
+}
+@media print {
+  @page {
+    size: 50mm 50mm;
+  }
+  .QRcode {
+    text-align: initial;
+    display: initial;
+    justify-content: center;
+  }
+  .test {
+    width: 30%;
+  }
+  .test2 {
+    font-size: 1rem;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  img {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .no-print {
+    display: none;
+  }
 }

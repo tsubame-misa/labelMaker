@@ -13,7 +13,9 @@ import {
   IonButtons,
   useIonViewWillEnter,
   IonIcon,
+  IonTitle,
 } from "@ionic/react";
+/**TODO:Home.cssじゃなくす */
 import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
@@ -21,7 +23,7 @@ import { addOutline } from "ionicons/icons";
 
 const MakeList = ({ history }) => {
   const { id } = useParams();
-  const [programs, setProcrams] = useState([]);
+  const [programs, setProcrams] = useState([{ id: 0, name: "" }]);
   const [labelName, setLabelName] = useState();
   const [data, setData] = useState([]);
 
@@ -45,15 +47,16 @@ const MakeList = ({ history }) => {
       (labelName === undefined || labelName === "") &&
       rmNothing.length === 0
     ) {
-      alert("ラベル名とアイテム名を入力してください");
+      //alert("ラベル名とアイテム名を入力してください");
       return 0;
-    } else if (labelName === undefined || labelName === "") {
+    }
+    /*} else if (labelName === undefined || labelName === "") {
       alert("ラベル名を入力してください");
       return 0;
     } else if (rmNothing.length === 0) {
       alert("アイテム名を入力してください");
       return 0;
-    }
+    }*/
 
     const newData = { id: id, label: labelName, i_list: rmNothing };
 
@@ -112,11 +115,19 @@ const MakeList = ({ history }) => {
         <IonHeader>
           <IonToolbar class="Header">
             <IonButtons slot="start">
-              <IonBackButton color="primary" defaultHref="/home" text="戻る" />
+              <IonBackButton defaultHref="/home" text="戻る" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton onClick={() => pushData()} color="primary">
-                保存
+              <IonButton
+                expand="block"
+                onClick={() => {
+                  const saved = pushData();
+                  if (saved) {
+                    history.push(`/list/${id}/qrcode`);
+                  }
+                }}
+              >
+                ラベル印刷
               </IonButton>
             </IonButtons>
           </IonToolbar>
@@ -125,7 +136,8 @@ const MakeList = ({ history }) => {
               value={labelName}
               placeholder="ラベル名"
               onIonChange={(e) => setLabelName(e.detail.value)}
-              class="LabelName"
+              className="LabelName"
+              onBlur={() => pushData()}
             ></IonInput>
           </IonToolbar>
         </IonHeader>
@@ -136,12 +148,13 @@ const MakeList = ({ history }) => {
               <IonItem class="Item">
                 <IonInput
                   value={item.name}
-                  placeholder="番組名"
+                  placeholder="アイテム名"
                   onIonChange={(e) => {
                     const newPrograms = Array.from(programs);
                     newPrograms[key].name = e.detail.value;
                     setProcrams(newPrograms);
                   }}
+                  onBlur={() => pushData()}
                 ></IonInput>
               </IonItem>
               <IonItemOptions side="end">
@@ -170,19 +183,6 @@ const MakeList = ({ history }) => {
             <IonIcon icon={addOutline} color="primary" />
           </IonButton>
         </div>
-
-        <IonButton
-          color="primary"
-          expand="block"
-          onClick={() => {
-            const saved = pushData();
-            if (saved) {
-              history.push(`/list/${id}/qrcode`);
-            }
-          }}
-        >
-          ラベル印刷
-        </IonButton>
       </IonContent>
     </IonPage>
   );

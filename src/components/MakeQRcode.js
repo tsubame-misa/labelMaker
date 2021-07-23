@@ -7,11 +7,13 @@ import {
   IonButtons,
   IonLoading, 
   useIonViewWillEnter,
-  IonTitle,
 } from "@ionic/react";
 import "../pages/Home.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import img from "./panda.PNG";
+import img2 from "../images/P1.png";
+import QRCode from "qrcode.react";
 
 const MakeQRcode = () => {
   const { id } = useParams();
@@ -30,18 +32,14 @@ const MakeQRcode = () => {
       }
     }
   }, [labelName]);
-
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="no-print">
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton color="primary" defaultHref="/home" />
+            <IonBackButton defaultHref="/home" text="戻る" />
           </IonButtons>
           <IonButtons slot="end"></IonButtons>
-        </IonToolbar>
-        <IonToolbar>
-          <IonTitle>LableMaker QRコード</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -53,14 +51,13 @@ const MakeQRcode = () => {
           duration={1200}
         />
         <div className="QRcode">
-          <figure>
+          <div className="test">
             <img
               src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`}
-              style={{ width: "50%" }}
               alt=""
             />
-            <figcaption> {labelName}</figcaption>
-          </figure>
+            <p className="test2">{labelName}</p>
+          </div>
         </div>
       </IonContent>
     </IonPage>
