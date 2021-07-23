@@ -3,16 +3,23 @@
 }
 
 .QRcode {
-  text-align: center;
-  margin-top: 100px;
-  -webkit-touch-callout: default;
+  margin-top: 28vh;
+  display: flex;
+  justify-content: center;
+}
+.test {
+  width: 45%;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Header {
   --padding-top: 16px;
   --padding-bottom: 16px;
-  font-size: 25px; 
-  --ion-toolbar-color : white;
+  font-size: 25px;
+  --ion-toolbar-color: white;
   --ion-toolbar-background: #f3a659;
   /*border-bottom: solid 1px #f0973f;*/
 }
@@ -27,8 +34,8 @@
 */
 
 .toolbar-title-default {
-  --padding-top: 30px;
-  --padding-bottom: 40px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
 }
 
 .title-default {
@@ -40,29 +47,48 @@
 .LabelName {
   font-weight: bold;
   padding-left: 20px;
-  /*text-align: center;*/
 }
 .Label {
   font-weight: bold;
-  /*padding-left: 20px;
-  text-align: center;*/
 }
 .Item {
   padding-left: 15px;
 }
-/*
-img {
-  -webkit-touch-callout: default;
-}
-canvas {
-  -webkit-touch-callout: default;
+
+.test2 {
+  font-size: 1.4rem;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
 }
 
-.test {
-  -webkit-touch-callout: default;
+@page pagename {
+  size: A4 portrait;
+  margin: 10px;
 }
-
-div {
-  -webkit-touch-callout: default
+@media print {
+  @page {
+    size: 50mm 50mm;
+  }
+  .QRcode {
+    text-align: initial;
+    display: initial;
+    justify-content: center;
+  }
+  .test {
+    width: 25%;
+  }
+  .test2 {
+    font-size: 1rem;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  img {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .no-print {
+    display: none;
+  }
 }
-*/

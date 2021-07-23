@@ -1,6 +1,8 @@
 import { IonSlide } from "@ionic/react";
 import img1 from "../../images/P3_1.png";
 import img2 from "../../images/p3_2.png";
+import "./Slide.css";
+
 const Slide3 = () => {
   return (
     <IonSlide>
@@ -18,7 +20,7 @@ const Slide3 = () => {
           />
         </div>
         <div className="position">
-          <h2 style={{ margin: "1.5rem" }}>貼る</h2>
+          <h2 className="title">貼る</h2>
           <p>
             QRコードを印刷して
             <br />

@@ -1,6 +1,6 @@
 import { IonSlide, IonButton } from "@ionic/react";
-import img from "../../images/p2.png";
-const Slide5 = () => {
+
+const Slide6 = () => {
   function logined() {
     if ("visited" in localStorage) {
       return true;
@@ -18,7 +18,11 @@ const Slide5 = () => {
   return (
     <IonSlide>
       <div className="center_m5">
-        <p>何か一言</p>
+        <p>
+          まずは既にダビングしているディスクを
+          <br />
+          登録してみましょう！
+        </p>
         <IonButton
           routerLink={"/home"}
           fill="outline"
@@ -34,4 +38,4 @@ const Slide5 = () => {
   );
 };
 
-export default Slide5;
+export default Slide6;

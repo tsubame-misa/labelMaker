@@ -5,31 +5,41 @@ import {
   IonToolbar,
   IonBackButton,
   IonButtons,
+  IonLoading,
   useIonViewWillEnter,
 } from "@ionic/react";
 import "../pages/Home.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
-import img from "./panda.PNG";
-import img2 from "../images/P1.png";
-import QRCode from "qrcode.react";
 
 const MakeQRcode = () => {
   const { id } = useParams();
   const [labelName, setLabelName] = useState();
+  const [showLoading, setShowLoading] = useState(true);
+  const [url, setUrl] = useState(null);
 
   useIonViewWillEnter(() => {
-    const getData = JSON.parse(localStorage.getItem("data")) || [{ name: "" }];
-    for (const item of getData) {
-      if (item.id === id) {
-        setLabelName(item.label);
+    (async () => {
+      const getData = (await JSON.parse(localStorage.getItem("data"))) || [
+        { id: null, name: "" },
+      ];
+      const response = await fetch(
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`
+      );
+      setUrl(response.url);
+      for (const item of getData) {
+        if (item.id === id) {
+          setLabelName(item.label);
+          setShowLoading(false);
+        }
       }
-    }
+    })();
   }, [labelName]);
+
   return (
     <IonPage>
       <IonHeader className="no-print">
-        <IonToolbar>
+        <IonToolbar class="Header">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" text="戻る" />
           </IonButtons>
@@ -38,16 +48,13 @@ const MakeQRcode = () => {
       </IonHeader>
       <IonContent>
         <div className="QRcode">
-          <figure>
-            <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`}
-              style={{ width: "50%" }}
-              alt=""
-            />
-            <figcaption> {labelName}</figcaption>
-          </figure>
+          <div className="test">
+            <img src={url} alt="" />
+            <p className="test2">{labelName}</p>
+          </div>
         </div>
       </IonContent>
+      <IonLoading isOpen={showLoading} />
     </IonPage>
   );
 };

@@ -17,17 +17,18 @@ import {
   Slide5,
   Slide6,
 } from "./slides";
+import "../pages/Home.css";
 
-const Guido = ({ modal, history }) => {
+const Guide = ({ modal, history }) => {
   return (
     <IonPage>
       {modal ? (
         []
       ) : (
         <IonHeader>
-          <IonToolbar className="color">
+          <IonToolbar class="Header">
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
+              <IonBackButton defaultHref="/" text="戻る" />
             </IonButtons>
             <IonTitle>利用ガイド</IonTitle>
           </IonToolbar>
@@ -39,7 +40,7 @@ const Guido = ({ modal, history }) => {
           options={{ initialSlide: 0 }}
           style={{ height: "100%" }}
         >
-          <Slide0 />
+          {modal ? <Slide0 /> : []}
           <Slide1 />
           <Slide2 />
           <Slide3 />
@@ -52,4 +53,4 @@ const Guido = ({ modal, history }) => {
   );
 };
 
-export default Guido;
+export default Guide;
