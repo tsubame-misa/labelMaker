@@ -35,7 +35,6 @@ const MakeQRcode = () => {
       }
     })();
   }, [labelName]);
-
   return (
     <IonPage>
       <IonHeader className="no-print">
@@ -47,12 +46,16 @@ const MakeQRcode = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <div className="QRcode">
-          <div className="test">
-            <img src={url} alt="" />
-            <p className="test2">{labelName}</p>
+        {!showLoading ? (
+          <div className="QRcode">
+            <div className="test">
+              <img src={url} alt="QRコード" />
+              <p className="QRlabel">{labelName}</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          []
+        )}
       </IonContent>
       <IonLoading isOpen={showLoading} />
     </IonPage>

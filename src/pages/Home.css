@@ -55,7 +55,7 @@
   padding-left: 15px;
 }
 
-.test2 {
+.QRlabel {
   font-size: 1.4rem;
   margin: 0px;
   display: flex;
@@ -78,7 +78,7 @@
   .test {
     width: 25%;
   }
-  .test2 {
+  .QRlabel {
     font-size: 1rem;
     margin-left: 10px;
     display: flex;
