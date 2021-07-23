@@ -1,5 +1,5 @@
 import { IonSlide } from "@ionic/react";
-import img from "../../images/p2.png";
+import img from "../../images/P5.png";
 import "./Slide.css";
 
 const Slide5 = () => {
@@ -7,7 +7,7 @@ const Slide5 = () => {
     <IonSlide>
       <div>
         <div className="logo">
-          <img src={img} alt="ロゴ画像" style={{ width: "80%" }} />
+          <img src={img} alt="ロゴ画像" style={{ width: "75%" }} />
         </div>
         <div className="position">
           <h2 className="title">探す</h2>

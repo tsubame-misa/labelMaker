@@ -14,8 +14,8 @@
 .Header {
   --padding-top: 16px;
   --padding-bottom: 16px;
-  font-size: 25px; 
-  --ion-toolbar-color : white;
+  font-size: 25px;
+  --ion-toolbar-color: white;
   --ion-toolbar-background: #f3a659;
   /*border-bottom: solid 1px #f0973f;*/
 }
@@ -72,7 +72,7 @@
     justify-content: center;
   }
   .test {
-    width: 30%;
+    width: 25%;
   }
   .test2 {
     font-size: 1rem;

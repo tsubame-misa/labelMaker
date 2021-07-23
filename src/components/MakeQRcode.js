@@ -5,7 +5,7 @@ import {
   IonToolbar,
   IonBackButton,
   IonButtons,
-  IonLoading, 
+  IonLoading,
   useIonViewWillEnter,
 } from "@ionic/react";
 import "../pages/Home.css";
@@ -32,6 +32,8 @@ const MakeQRcode = () => {
       }
     }
   }, [labelName]);
+
+  console.log(labelName);
   return (
     <IonPage>
       <IonHeader className="no-print">
@@ -44,10 +46,10 @@ const MakeQRcode = () => {
       </IonHeader>
       <IonContent>
         <IonLoading
-          cssClass='my-custom-class'
+          cssClass="my-custom-class"
           isOpen={showLoading}
           onDidDismiss={() => setShowLoading(false)}
-          message={'Please wait...'}
+          message={"Please wait..."}
           duration={1200}
         />
         <div className="QRcode">
