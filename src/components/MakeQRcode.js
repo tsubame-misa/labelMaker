@@ -9,21 +9,14 @@ import {
   useIonViewWillEnter,
 } from "@ionic/react";
 import "../pages/Home.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
-import img from "./panda.PNG";
-import img2 from "../images/P1.png";
 
 const MakeQRcode = () => {
   const { id } = useParams();
   const [labelName, setLabelName] = useState();
   const [showLoading, setShowLoading] = useState(true);
   const [url, setUrl] = useState(null);
-  console.log(showLoading);
-
-  /*setTimeout(() => {
-    setShowLoading(false);
-  }, 2000);*/
 
   useIonViewWillEnter(() => {
     (async () => {
@@ -43,11 +36,10 @@ const MakeQRcode = () => {
     })();
   }, [labelName]);
 
-  console.log(labelName);
   return (
     <IonPage>
       <IonHeader className="no-print">
-        <IonToolbar>
+        <IonToolbar class="Header">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" text="戻る" />
           </IonButtons>
@@ -55,13 +47,6 @@ const MakeQRcode = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {/*<IonLoading
-          cssClass="my-custom-class"
-          isOpen={showLoading}
-          onDidDismiss={() => setShowLoading(false)}
-          message={"Please wait..."}
-          duration={1200}
-        />*/}
         <div className="QRcode">
           <div className="test">
             <img src={url} alt="" />

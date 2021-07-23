@@ -3,12 +3,16 @@
 }
 
 .QRcode {
-  margin-top: 100px;
+  margin-top: 28vh;
   display: flex;
   justify-content: center;
 }
 .test {
-  width: 50%;
+  width: 45%;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Header {
