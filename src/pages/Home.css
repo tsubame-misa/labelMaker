@@ -9,8 +9,22 @@
 }
 
 .Header {
-  border-bottom: solid 1px #f0973f;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  font-size: 25px; 
+  --ion-toolbar-color : white;
+  --ion-toolbar-background: #f3a659;
+  /*border-bottom: solid 1px #f0973f;*/
 }
+/*
+.HToolbar {
+  --padding-top: 15px;
+  --padding-bottom: 15px;
+  font-size: 25px; 
+  --ion-toolbar-color : white;
+  --ion-toolbar-background: #f3a659;
+}
+*/
 
 .toolbar-title-default {
   --padding-top: 30px;
@@ -28,7 +42,11 @@
   padding-left: 20px;
   /*text-align: center;*/
 }
-
+.Label {
+  font-weight: bold;
+  /*padding-left: 20px;
+  text-align: center;*/
+}
 .Item {
   padding-left: 15px;
 }

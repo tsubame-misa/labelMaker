@@ -11,7 +11,7 @@ import "../pages/Home.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import img from "./panda.PNG";
-import QRCode from "qrcode.react";
+//import QRCode from "qrcode.react";
 
 const MakeQRcode = () => {
   const { id } = useParams();
@@ -107,9 +107,9 @@ const MakeQRcode = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar class="Header">
           <IonButtons slot="start">
-            <IonBackButton color="primary" defaultHref="/home" text="戻る" />
+            <IonBackButton defaultHref="/home" text="戻る" />
           </IonButtons>
           <IonButtons slot="end"></IonButtons>
         </IonToolbar>
