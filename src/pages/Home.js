@@ -127,13 +127,13 @@ const Home = ({ history }) => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar class="HToolbar">
+        <IonToolbar class="Header">
           <IonTitle>Donuts</IonTitle>
           <IonButtons slot="end">
             <IonButton
-              color="dark"
+              //color="dark"
               size="large"
-              fill="outline"
+              //fill="outline"
               onClick={() => {
                 history.push("/setting/guide");
               }}

@@ -17,6 +17,7 @@ import {
   Slide5,
   Slide6,
 } from "./slides";
+import "../pages/Home.css";
 
 const Guide = ({ modal, history }) => {
   return (
@@ -25,9 +26,9 @@ const Guide = ({ modal, history }) => {
         []
       ) : (
         <IonHeader>
-          <IonToolbar>
+          <IonToolbar class="Header">
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" color="dark" text="戻る" />
+              <IonBackButton defaultHref="/" text="戻る" />
             </IonButtons>
             <IonTitle>利用ガイド</IonTitle>
           </IonToolbar>
