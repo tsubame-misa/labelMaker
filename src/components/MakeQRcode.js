@@ -31,7 +31,7 @@ const MakeQRcode = () => {
       <IonHeader className="no-print">
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton color="primary" defaultHref="/home" text="戻る" />
+            <IonBackButton defaultHref="/home" text="戻る" />
           </IonButtons>
           <IonButtons slot="end"></IonButtons>
         </IonToolbar>
