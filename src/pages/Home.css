@@ -3,9 +3,9 @@
 }
 
 .QRcode {
-  text-align: center;
   margin-top: 100px;
-  -webkit-touch-callout: default;
+  display: flex;
+  justify-content: center;
 }
 
 .Header {
@@ -32,19 +32,25 @@
 .Item {
   padding-left: 15px;
 }
-/*
-img {
-  -webkit-touch-callout: default;
-}
-canvas {
-  -webkit-touch-callout: default;
-}
 
-.test {
-  -webkit-touch-callout: default;
+@page pagename {
+  size: A4 portrait;
+  margin: 10px;
 }
-
-div {
-  -webkit-touch-callout: default
+@media print {
+  @page {
+    size: 50mm 50mm;
+  }
+  .QRcode {
+    text-align: initial;
+    margin-top: 0px;
+    display: initial;
+    justify-content: center;
+  }
+  img {
+    margin: 10px;
+  }
+  .no-print {
+    display: none;
+  }
 }
-*/
