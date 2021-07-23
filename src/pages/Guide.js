@@ -18,7 +18,7 @@ import {
   Slide6,
 } from "./slides";
 
-const Guido = ({ modal, history }) => {
+const Guide = ({ modal, history }) => {
   return (
     <IonPage>
       {modal ? (
@@ -52,4 +52,4 @@ const Guido = ({ modal, history }) => {
   );
 };
 
-export default Guido;
+export default Guide;

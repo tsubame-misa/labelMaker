@@ -19,7 +19,7 @@ import {
 } from "@ionic/react";
 import { addOutline, search, helpCircleOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
-import Guide from "./Guido";
+import Guide from "./Guide";
 import "./Home.css";
 
 const Home = ({ history }) => {

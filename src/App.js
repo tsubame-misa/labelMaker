@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import makeList from "./components/makeList";
 import ShowList from "./components/showList";
 import MakeQRcode from "./components/MakeQRcode";
-import Guide from "./pages/Guido";
+import Guide from "./pages/Guide";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
