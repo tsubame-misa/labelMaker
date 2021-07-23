@@ -13,6 +13,7 @@ import {
   IonButtons,
   useIonViewWillEnter,
   IonIcon,
+  IonTitle,
 } from "@ionic/react";
 /**TODO:Home.cssじゃなくす */
 import "../pages/Home.css";
