@@ -14,8 +14,10 @@ import {
   useIonViewWillEnter,
   IonSearchbar,
   IonItemDivider,
+  IonButton,
+  IonButtons,
 } from "@ionic/react";
-import { addOutline, search } from "ionicons/icons";
+import { addOutline, search, helpCircleOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import Guide from "./Guido";
 import "./Home.css";
@@ -127,6 +129,18 @@ const Home = ({ history }) => {
       <IonHeader>
         <IonToolbar class="HToolbar">
           <IonTitle>Donuts</IonTitle>
+          <IonButtons slot="end">
+            <IonButton
+              color="dark"
+              size="large"
+              fill="outline"
+              onClick={() => {
+                history.push("/setting/guide");
+              }}
+            >
+              <IonIcon icon={helpCircleOutline} />
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -189,7 +203,7 @@ const Home = ({ history }) => {
           })}
         </div>
 
-        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+        <IonFab vertical="bottom" horizontal="end" slot="fixed" id={"test"}>
           <IonFabButton
             color="primary"
             onClick={() => {

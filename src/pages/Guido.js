@@ -25,9 +25,9 @@ const Guido = ({ modal, history }) => {
         []
       ) : (
         <IonHeader>
-          <IonToolbar className="color">
+          <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/" />
+              <IonBackButton defaultHref="/" color="dark" text="戻る" />
             </IonButtons>
             <IonTitle>利用ガイド</IonTitle>
           </IonToolbar>
