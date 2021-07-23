@@ -19,7 +19,7 @@ import { useParams } from "react-router";
 
 const ShowList = () => {
   const { id } = useParams();
-  const [programs, setProcrams] = useState([{ name: "" }]);
+  const [programs, setProcrams] = useState([{ id: null, name: "" }]);
   const [labelName, setLabelName] = useState();
 
   useIonViewWillEnter(() => {
@@ -61,13 +61,8 @@ const ShowList = () => {
               <IonBackButton defaultHref="/" text="戻る" />
             </IonButtons>
             <IonButtons slot="end">
-              <IonButton routerLink={`/makeList/${id}`} >
-                編集
-              </IonButton>
-              <IonButton
-                expand="block"
-                routerLink={`/list/${id}/qrcode`}
-              >
+              <IonButton routerLink={`/makeList/${id}`}>編集</IonButton>
+              <IonButton expand="block" routerLink={`/list/${id}/qrcode`}>
                 ラベル印刷
               </IonButton>
             </IonButtons>
