@@ -13,7 +13,6 @@ import {
   IonButtons,
   useIonViewWillEnter,
   IonIcon,
-  IonTitle,
 } from "@ionic/react";
 /**TODO:Home.cssじゃなくす */
 import "../pages/Home.css";
@@ -127,7 +126,7 @@ const MakeList = ({ history }) => {
                   }
                 }}
               >
-                ラベル印刷
+                QRコード
               </IonButton>
             </IonButtons>
           </IonToolbar>

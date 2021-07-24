@@ -80,7 +80,7 @@ const Home = ({ history }) => {
     }
 
     const allData = await await JSON.parse(localStorage.getItem("data"));
-    const newData = allData.filter((item) => findWord(item.label, word));
+    const newData = allData.filter((item) => findWord(item.label, word)) || [];
     const newItemData = [];
     for (const label of allData) {
       for (const item of label.i_list) {

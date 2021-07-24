@@ -63,7 +63,7 @@ const ShowList = () => {
             <IonButtons slot="end">
               <IonButton routerLink={`/makeList/${id}`}>編集</IonButton>
               <IonButton expand="block" routerLink={`/list/${id}/qrcode`}>
-                ラベル印刷
+                QRコード
               </IonButton>
             </IonButtons>
           </IonToolbar>
