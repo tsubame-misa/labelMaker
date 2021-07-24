@@ -6,6 +6,7 @@ import {
   IonBackButton,
   IonButtons,
   IonLoading,
+  IonButton,
   useIonViewWillEnter,
 } from "@ionic/react";
 import "../pages/Home.css";
@@ -41,6 +42,15 @@ const MakeQRcode = () => {
         <IonToolbar class="Header">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" text="戻る" />
+          </IonButtons>
+          <IonButtons slot="end">
+            <IonButton
+              onClick={() => {
+                window.print();
+              }}
+            >
+              印刷
+            </IonButton>
           </IonButtons>
           <IonButtons slot="end"></IonButtons>
         </IonToolbar>
