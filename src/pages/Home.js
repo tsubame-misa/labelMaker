@@ -37,7 +37,7 @@ const Home = ({ history }) => {
 
       let randomId = Math.floor(Math.random() * 10000);
       let same = true;
-      if (getData !== null) {
+      if (getData !== null && getData.length > 0) {
         while (same) {
           for (const d of getData) {
             if (d.id !== randomId) {
@@ -79,8 +79,9 @@ const Home = ({ history }) => {
       return;
     }
 
-    const allData = await await JSON.parse(localStorage.getItem("data"));
-    const newData = allData.filter((item) => findWord(item.label, word)) || [];
+    const allData =
+      (await await JSON.parse(localStorage.getItem("data"))) || [];
+    const newData = allData.filter((item) => findWord(item.label, word));
     const newItemData = [];
     for (const label of allData) {
       for (const item of label.i_list) {
