@@ -40,6 +40,7 @@ const MakeList = ({ history }) => {
   }, [data]);
 
   function pushData() {
+    console.log("push data");
     const rmNothing = programs.filter((p) => p.name !== "");
 
     if (
@@ -65,8 +66,13 @@ const MakeList = ({ history }) => {
         if (d.id === id) {
           d.i_list = newData.i_list;
           changed = true;
+          if (d.label !== labelName) {
+            console.log("henkou");
+            d.label = labelName;
+          }
         }
       }
+
       if (changed) {
         localStorage.removeItem("data");
         localStorage.setItem("data", JSON.stringify(data));
