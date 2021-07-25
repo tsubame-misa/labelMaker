@@ -7,7 +7,11 @@ const Slide2 = () => {
     <IonSlide>
       <div>
         <div className="logo">
-          <img src={img} alt="ロゴ画像" style={{ width: "80%" }} />
+          <img
+            src={img}
+            alt="ロゴ画像"
+            style={{ maxWidth: "300px", width: "80%" }}
+          />
         </div>
         <div className="position">
           <h2 className="title">作る</h2>

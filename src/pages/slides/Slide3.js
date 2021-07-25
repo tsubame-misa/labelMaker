@@ -11,12 +11,12 @@ const Slide3 = () => {
           <img
             src={img1}
             alt="ロゴ画像"
-            style={{ width: "45%", paddingRight: "2.5%" }}
+            style={{ maxWidth: "200px", width: "45%", paddingRight: "2.5%" }}
           />
           <img
             src={img2}
             alt="ロゴ画像"
-            style={{ width: "45%", paddingLeft: "2.5%" }}
+            style={{ maxWidth: "200px", width: "45%", paddingLeft: "2.5%" }}
           />
         </div>
         <div className="position">

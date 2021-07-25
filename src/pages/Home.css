@@ -57,6 +57,7 @@
 
 .QRlabel {
   font-size: 1.4rem;
+  text-align: center;
   margin: 0px;
   display: flex;
   justify-content: center;
@@ -68,7 +69,7 @@
 }
 @media print {
   @page {
-    size: 50mm 50mm;
+    size: A4;
   }
   .QRcode {
     text-align: initial;
@@ -80,6 +81,7 @@
   }
   .QRlabel {
     font-size: 1rem;
+    text-align: center;
     margin-left: 10px;
     display: flex;
     justify-content: center;
