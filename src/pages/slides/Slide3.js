@@ -7,7 +7,14 @@ const Slide3 = () => {
   return (
     <IonSlide>
       <div>
-        <div className="logo" style={{ display: "flex" }}>
+        <div
+          className="logo"
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
+          }}
+        >
           <img
             src={img1}
             alt="ロゴ画像"
