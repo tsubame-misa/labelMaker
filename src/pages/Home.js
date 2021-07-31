@@ -79,6 +79,8 @@ const Home = ({ history }) => {
       return;
     }
 
+    setSearchText(word);
+
     const allData =
       (await await JSON.parse(localStorage.getItem("data"))) || [];
     const newData = allData.filter((item) => findWord(item.label, word));
@@ -147,6 +149,8 @@ const Home = ({ history }) => {
         <IonSearchbar
           value={searchText}
           showCancelButton="focus"
+          placeholder="検索"
+          cancelButtonText="キャンセル"
           onIonCancel={() => SearchData(false)}
           onIonChange={(e) => {
             setSearch(!search);
