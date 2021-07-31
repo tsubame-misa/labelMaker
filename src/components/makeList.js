@@ -137,7 +137,7 @@ const MakeList = ({ history }) => {
           <IonToolbar class="LabelName">
             <IonInput
               value={labelName}
-              placeholder="ラベル名"
+              placeholder="ディスク名"
               onIonChange={(e) => setLabelName(e.detail.value)}
               className="LabelName"
               onBlur={() => pushData()}

@@ -157,7 +157,7 @@ const Home = ({ history }) => {
         {/**TODO:サーチ有無でコンポーメント分ける */}
         <div>
           {searchItem.length > 0 ? (
-            <IonItemDivider color="light">ラベル</IonItemDivider>
+            <IonItemDivider color="light">ディスク名</IonItemDivider>
           ) : (
             []
           )}
@@ -186,7 +186,7 @@ const Home = ({ history }) => {
             );
           })}
           {itemData.length > 0 ? (
-            <IonItemDivider color="light">アイテム</IonItemDivider>
+            <IonItemDivider color="light">タイトル名</IonItemDivider>
           ) : (
             []
           )}
