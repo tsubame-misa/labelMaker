@@ -137,7 +137,7 @@ const MakeList = ({ history }) => {
           <IonToolbar class="LabelName">
             <IonInput
               value={labelName}
-              placeholder="ディスク名"
+              placeholder="ディスク"
               onIonChange={(e) => setLabelName(e.detail.value)}
               className="LabelName"
               onBlur={() => pushData()}
@@ -151,7 +151,7 @@ const MakeList = ({ history }) => {
               <IonItem class="Item">
                 <IonInput
                   value={item.name}
-                  placeholder="アイテム名"
+                  placeholder="タイトル"
                   onIonChange={(e) => {
                     const newPrograms = Array.from(programs);
                     newPrograms[key].name = e.detail.value;
