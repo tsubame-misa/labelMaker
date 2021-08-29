@@ -143,6 +143,17 @@ const Home = ({ history }) => {
               <IonIcon icon={helpOutline} />
             </IonButton>
           </IonButtons>
+          <IonButtons slot="end" style={{ marginRight: "10px" }}>
+            <IonButton
+              fill="outline"
+              strong={true}
+              onClick={() => {
+                history.push("/login");
+              }}
+            >
+              Login
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

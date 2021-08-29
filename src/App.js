@@ -6,6 +6,8 @@ import makeList from "./components/makeList";
 import ShowList from "./components/showList";
 import MakeQRcode from "./components/MakeQRcode";
 import Guide from "./pages/Guide";
+import Login from "./pages/Login";
+import SignUp from "./pages/Signup";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -31,6 +33,8 @@ const App = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/home" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={SignUp} />
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
