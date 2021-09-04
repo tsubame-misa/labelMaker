@@ -132,26 +132,15 @@ const Home = ({ history }) => {
       <IonHeader>
         <IonToolbar class="Header">
           <IonTitle>Donuts</IonTitle>
-          <IonButtons slot="start" style={{ marginLeft: "10px" }}>
-            <IonButton
-              fill="outline"
-              strong={true}
-              onClick={() => {
-                history.push("/setting/guide");
-              }}
-            >
-              <IonIcon icon={helpOutline} />
-            </IonButton>
-          </IonButtons>
           <IonButtons slot="end" style={{ marginRight: "10px" }}>
             <IonButton
               fill="outline"
               strong={true}
               onClick={() => {
-                history.push("/login");
+                history.push("/setting");
               }}
             >
-              Login
+              <IonIcon icon={helpOutline} />
             </IonButton>
           </IonButtons>
         </IonToolbar>

@@ -4,9 +4,8 @@ import { IonPage, IonContent } from "@ionic/react";
 //import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-const Login = () => {
+const Login = ({ history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = event.target.elements;
@@ -19,6 +18,7 @@ const Login = () => {
         // Signed in
         var user = userCredential.user;
         console.log("ok");
+        history.push("/home");
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -26,7 +26,6 @@ const Login = () => {
         console.log("err", error);
       });
   };
-  console.log("here");
 
   return (
     <IonPage>
@@ -54,3 +53,32 @@ const Login = () => {
 };
 
 export default Login;
+/*
+//import React from "react";
+import firebase from "../config";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+//import firebaseui from "firebaseui";
+
+const uiConfig = {
+  signInFlow: "popup",
+  signInSuccessUrl: "/",
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    /*firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
+  ],
+};
+
+const SignInScreen = (props) => {
+  return (
+    <div>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+    </div>
+  );
+};
+export default SignInScreen;
+*/
