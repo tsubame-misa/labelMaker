@@ -10,19 +10,11 @@ import {
   IonList,
   useIonViewWillEnter,
 } from "@ionic/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import firebase from "../config";
 import "../pages/Home.css";
 
 const Setting = ({ history }) => {
-  const [user, setUser] = useState(null);
-
-  useIonViewWillEnter(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      setUser(user);
-    });
-  });
-
   function logout() {
     firebase.auth().signOut();
     history.push("/");
@@ -31,6 +23,14 @@ const Setting = ({ history }) => {
   return (
     <IonPage>
       <IonContent>
+        <IonHeader>
+          <IonToolbar class="Header">
+            <IonTitle>設定</IonTitle>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/home" text="戻る" />
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
         <IonList>
           <IonButton
             slot="end"
@@ -40,26 +40,14 @@ const Setting = ({ history }) => {
           >
             利用ガイド
           </IonButton>
-          {/*loginが表示されるのはありえん */}
-          {user == null ? (
-            <IonButton
-              slot="end"
-              expand="full"
-              color="light"
-              routerLink="/login"
-            >
-              Login
-            </IonButton>
-          ) : (
-            <IonButton
-              slot="end"
-              expand="full"
-              color="light"
-              onClick={() => logout()}
-            >
-              Logout
-            </IonButton>
-          )}
+          <IonButton
+            slot="end"
+            expand="full"
+            color="light"
+            onClick={() => logout()}
+          >
+            Logout
+          </IonButton>
         </IonList>
       </IonContent>
     </IonPage>
