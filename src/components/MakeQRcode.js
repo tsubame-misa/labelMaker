@@ -12,6 +12,7 @@ import {
 import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
+import firebase from "../config";
 
 const MakeQRcode = () => {
   const { id } = useParams();
@@ -21,19 +22,35 @@ const MakeQRcode = () => {
 
   useIonViewWillEnter(() => {
     (async () => {
-      const getData = (await JSON.parse(localStorage.getItem("data"))) || [
-        { id: null, name: "" },
-      ];
+      try {
+        const db = firebase.firestore();
+        db.collection("/users")
+          .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
+          .get()
+          .then(function (doc) {
+            if (doc.exists) {
+              const data = doc.data().data;
+              for (const item of data) {
+                if (item.id === id) {
+                  setLabelName(item.label);
+                  //setShowLoading(false);
+                }
+              }
+            } else {
+              console.log("No user");
+            }
+          })
+          .catch(function (error) {
+            console.log("Error : ", error);
+          });
+      } catch (err) {
+        console.log(`Error: ${JSON.stringify(err)}`);
+      }
       const response = await fetch(
         `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`
       );
       setUrl(response.url);
-      for (const item of getData) {
-        if (item.id === id) {
-          setLabelName(item.label);
-          setShowLoading(false);
-        }
-      }
+      setShowLoading(false);
     })();
   }, [labelName]);
   return (

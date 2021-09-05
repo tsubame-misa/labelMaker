@@ -1,12 +1,7 @@
 import {
   IonPage,
-  IonHeader,
-  IonToolbar,
   IonButton,
-  IonButtons,
-  IonBackButton,
   IonContent,
-  IonTitle,
   IonList,
   IonAlert,
   useIonViewWillEnter,
@@ -14,7 +9,6 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import firebase from "../config";
-import { Link } from "react-router-dom";
 import "../pages/Home.css";
 import "firebase/auth";
 import "firebase/firestore";

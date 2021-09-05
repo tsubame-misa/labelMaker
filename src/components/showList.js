@@ -17,36 +17,71 @@ import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
 
+import firebase from "../config";
+
 const ShowList = () => {
   const { id } = useParams();
   const [programs, setProcrams] = useState([{ id: null, name: "" }]);
   const [labelName, setLabelName] = useState();
+  const [data, setData] = useState(null);
 
   useIonViewWillEnter(() => {
-    const data = JSON.parse(localStorage.getItem("data"));
-    for (const item of data) {
-      if (item.id === id) {
-        setProcrams(item.i_list);
-        setLabelName(item.label);
-      }
+    try {
+      const db = firebase.firestore();
+      db.collection("/users")
+        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            const data = doc.data().data;
+            console.log(doc.data().data);
+            setData(data);
+            for (const item of data) {
+              if (item.id === id) {
+                setProcrams(item.i_list);
+                setLabelName(item.label);
+              }
+            }
+          } else {
+            console.log("No user");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error : ", error);
+        });
+    } catch (err) {
+      console.log(`Error: ${JSON.stringify(err)}`);
     }
   }, [programs]);
 
   function delItem(key) {
     const newPrograms = programs.filter((_, i) => i !== key);
     setProcrams(newPrograms);
-    const newObj = { id: Number(id), label: labelName, i_list: newPrograms };
-    const data = JSON.parse(localStorage.getItem("data"));
+    const newObj = { id: id, label: labelName, i_list: newPrograms };
     const newData = data.map((item) => {
-      if (item.id === Number(id)) {
+      if (item.id === id) {
         return newObj;
       } else {
         return item;
       }
     });
 
-    localStorage.removeItem("data");
-    localStorage.setItem("data", JSON.stringify(newData));
+    try {
+      const db = firebase.firestore();
+      db.collection("users")
+        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
+        .set({
+          data: newData,
+        })
+        .then(() => {
+          console.log("Document successfully written!");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    } catch (err) {
+      console.log(`Error: ${JSON.stringify(err)}`);
+    }
   }
 
   if (programs === undefined) {

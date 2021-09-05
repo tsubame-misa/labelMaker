@@ -30,6 +30,7 @@ const Home = ({ history }) => {
   const [serch, setSearch] = useState(false);
   const [itemData, setItemData] = useState([]);
   const [searchItem, setSearchItem] = useState([]);
+  const [allData, setAllData] = useState([]);
 
   useIonViewWillEnter(() => {
     (async () => {
@@ -42,6 +43,7 @@ const Home = ({ history }) => {
             if (doc.exists) {
               const firestoreData = doc.data().data;
               setData(firestoreData);
+              setAllData(firestoreData);
               let randomId = Math.floor(Math.random() * 10000);
               let same = true;
               if (firestoreData !== null && firestoreData?.length > 0) {
@@ -80,7 +82,6 @@ const Home = ({ history }) => {
       db.collection("users")
         .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
         .set({
-          name: "misato",
           data: newData,
         })
         .then(() => {
@@ -132,9 +133,6 @@ const Home = ({ history }) => {
     }
 
     setSearchText(word);
-
-    const allData =
-      (await await JSON.parse(localStorage.getItem("data"))) || [];
     const newData = allData.filter((item) => findWord(item.label, word));
     const newItemData = [];
     for (const label of allData) {

@@ -103,11 +103,27 @@ const MakeList = ({ history }) => {
   //useIonViewWillLeaveでなんでできない？
   function save() {
     const db = firebase.firestore();
+    let same = false;
+    const newData = data.map((item) => {
+      console.log(item.id, id, item.id === id);
+      if (item.id === id) {
+        same = true;
+        return itemData;
+      } else {
+        return item;
+      }
+    });
+    if (!same) {
+      newData.push(itemData);
+    }
+
+    console.log(newData);
+
     try {
       db.collection("users")
         .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
         .update({
-          data: data.concat(itemData),
+          data: newData,
         })
         .then(() => {
           console.log("Document successfully written!");
