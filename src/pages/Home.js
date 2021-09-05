@@ -21,7 +21,7 @@ import { addOutline, search, helpOutline } from "ionicons/icons";
 import { useState } from "react";
 import Guide from "./Guide";
 import "./Home.css";
-import firebase from "../config";
+import { getAllData, updateData } from "./service/api";
 
 const Home = ({ history }) => {
   const [data, setData] = useState([]);
@@ -34,86 +34,39 @@ const Home = ({ history }) => {
 
   useIonViewWillEnter(() => {
     (async () => {
-      try {
-        const db = firebase.firestore();
-        db.collection("/users")
-          .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
-          .get()
-          .then(function (doc) {
-            if (doc.exists) {
-              const firestoreData = doc.data().data;
-              setData(firestoreData);
-              setAllData(firestoreData);
-              let randomId = Math.floor(Math.random() * 10000);
-              let same = true;
-              if (firestoreData !== null && firestoreData?.length > 0) {
-                while (same) {
-                  for (const d of firestoreData) {
-                    if (d.id !== randomId) {
-                      same = false;
-                    } else {
-                      same = true;
-                    }
-                  }
-                  if (same) {
-                    randomId = Math.floor(Math.random() * 10000);
-                  }
-                }
-              }
-              setNextId(randomId);
-              setItemData([]);
+      const data = await getAllData();
+      setData(data);
+      setAllData(data);
+      let randomId = Math.floor(Math.random() * 10000);
+      let same = true;
+      if (data !== null && data?.length > 0) {
+        while (same) {
+          for (const d of data) {
+            if (d.id !== randomId) {
+              same = false;
             } else {
-              console.log("No user");
+              same = true;
             }
-          })
-          .catch(function (error) {
-            console.log("Error : ", error);
-          });
-      } catch (err) {
-        console.log(`Error: ${JSON.stringify(err)}`);
+          }
+          if (same) {
+            randomId = Math.floor(Math.random() * 10000);
+          }
+        }
       }
+      setNextId(randomId);
+      setItemData([]);
     })();
   });
 
   function delItem(id) {
     const newData = data.filter((d) => d.id !== id);
-    try {
-      const db = firebase.firestore();
-      db.collection("users")
-        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
-        .set({
-          data: newData,
-        })
-        .then(() => {
-          console.log("Document successfully written!");
-        })
-        .catch((error) => {
-          console.error("Error writing document: ", error);
-        });
-    } catch (err) {
-      console.log(`Error: ${JSON.stringify(err)}`);
-    }
+    updateData(newData);
   }
 
   async function getData() {
-    try {
-      const db = firebase.firestore();
-      db.collection("/users")
-        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            setData(doc.data().data);
-          } else {
-            console.log("no data");
-          }
-        })
-        .catch(function (error) {
-          console.log("Error : ", error);
-        });
-    } catch (err) {
-      console.log(`Error: ${JSON.stringify(err)}`);
-    }
+    const data = await getAllData();
+    setData(data);
+    setAllData(data);
   }
 
   function findWord(item, word) {
@@ -177,8 +130,6 @@ const Home = ({ history }) => {
     return <Guide modal={true} />;
   }
 
-  console.log(data);
-
   return (
     <IonPage>
       <IonHeader>
@@ -229,7 +180,7 @@ const Home = ({ history }) => {
                     expandable
                     onClick={async () => {
                       await delItem(d.id);
-                      const newData = await getData();
+                      getData();
                     }}
                   >
                     delete

@@ -16,8 +16,7 @@ import {
 import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
-
-import firebase from "../config";
+import { getAllData, updateData } from "../pages/service/api";
 
 const ShowList = () => {
   const { id } = useParams();
@@ -26,32 +25,17 @@ const ShowList = () => {
   const [data, setData] = useState(null);
 
   useIonViewWillEnter(() => {
-    try {
-      const db = firebase.firestore();
-      db.collection("/users")
-        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            const data = doc.data().data;
-            console.log(doc.data().data);
-            setData(data);
-            for (const item of data) {
-              if (item.id === id) {
-                setProcrams(item.i_list);
-                setLabelName(item.label);
-              }
-            }
-          } else {
-            console.log("No user");
-          }
-        })
-        .catch(function (error) {
-          console.log("Error : ", error);
-        });
-    } catch (err) {
-      console.log(`Error: ${JSON.stringify(err)}`);
-    }
+    (async () => {
+      const data = await getAllData();
+      setData(data);
+      //データの取り方次第でここなくせそう
+      for (const item of data) {
+        if (item.id === id) {
+          setProcrams(item.i_list);
+          setLabelName(item.label);
+        }
+      }
+    })();
   }, [programs]);
 
   function delItem(key) {
@@ -65,23 +49,7 @@ const ShowList = () => {
         return item;
       }
     });
-
-    try {
-      const db = firebase.firestore();
-      db.collection("users")
-        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
-        .set({
-          data: newData,
-        })
-        .then(() => {
-          console.log("Document successfully written!");
-        })
-        .catch((error) => {
-          console.error("Error writing document: ", error);
-        });
-    } catch (err) {
-      console.log(`Error: ${JSON.stringify(err)}`);
-    }
+    updateData(newData);
   }
 
   if (programs === undefined) {

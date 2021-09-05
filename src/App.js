@@ -38,8 +38,11 @@ const App = () => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      setUser(user.uid);
-      console.log(user.uid);
+      if (user !== null) {
+        setUser(user.uid);
+      } else {
+        setUser(null);
+      }
     });
   }, [user]);
 

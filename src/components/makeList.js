@@ -19,7 +19,7 @@ import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
 import { addOutline } from "ionicons/icons";
-import firebase from "../config";
+import { getAllData, updateData, setData2DB } from "../pages/service/api";
 
 const MakeList = ({ history }) => {
   const { id } = useParams();
@@ -29,34 +29,20 @@ const MakeList = ({ history }) => {
   const [itemData, setItemData] = useState(null);
 
   useIonViewWillEnter(() => {
-    try {
-      const db = firebase.firestore();
-      db.collection("/users")
-        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            const firestoreData = doc.data().data;
-            setData(firestoreData);
-            //データの取り方次第でここなくせそう
-            if (firestoreData !== null) {
-              for (const item of firestoreData) {
-                if (item.id === id) {
-                  setProcrams(item.i_list);
-                  setLabelName(item.label);
-                }
-              }
-            }
-          } else {
-            console.log("No user");
+    (async () => {
+      const data = await getAllData();
+      setData(data);
+      //データの取り方次第でここなくせそう
+      if (data !== null) {
+        for (const item of data) {
+          console.log(item.id, id);
+          if (item.id === id) {
+            setProcrams(item.i_list);
+            setLabelName(item.label);
           }
-        })
-        .catch(function (error) {
-          console.log("Error : ", error);
-        });
-    } catch (err) {
-      console.log(`Error: ${JSON.stringify(err)}`);
-    }
+        }
+      }
+    })();
   }, [data]);
 
   function pushData() {
@@ -102,10 +88,8 @@ const MakeList = ({ history }) => {
 
   //useIonViewWillLeaveでなんでできない？
   function save() {
-    const db = firebase.firestore();
     let same = false;
     const newData = data.map((item) => {
-      console.log(item.id, id, item.id === id);
       if (item.id === id) {
         same = true;
         return itemData;
@@ -116,27 +100,13 @@ const MakeList = ({ history }) => {
     if (!same) {
       newData.push(itemData);
     }
-
-    console.log(newData);
-
-    try {
-      db.collection("users")
-        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
-        .update({
-          data: newData,
-        })
-        .then(() => {
-          console.log("Document successfully written!");
-        })
-        .catch((error) => {
-          console.error("Error writing document: ", error);
-          return 0;
-        });
-    } catch (err) {
-      console.log(`Error: ${JSON.stringify(err)}`);
-      return 0;
+    if (data.length === 0) {
+      console.log("set");
+      setData2DB(newData);
+    } else {
+      console.log("update");
+      updateData(newData);
     }
-    return 1;
   }
 
   return (
@@ -160,9 +130,9 @@ const MakeList = ({ history }) => {
                 expand="block"
                 onClick={() => {
                   const saved = save();
-                  if (saved) {
-                    history.push(`/list/${id}/qrcode`);
-                  }
+                  //if (saved) {
+                  history.push(`/list/${id}/qrcode`);
+                  // }
                 }}
               >
                 QRコード
