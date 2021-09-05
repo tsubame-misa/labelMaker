@@ -21,6 +21,7 @@ import { addOutline, search, helpOutline } from "ionicons/icons";
 import { useState } from "react";
 import Guide from "./Guide";
 import "./Home.css";
+import firebase from "../config";
 
 const Home = ({ history }) => {
   const [data, setData] = useState([]);
@@ -32,35 +33,86 @@ const Home = ({ history }) => {
 
   useIonViewWillEnter(() => {
     (async () => {
-      const getData = await JSON.parse(localStorage.getItem("data"));
-      setData(getData);
-
-      let randomId = Math.floor(Math.random() * 10000);
-      let same = true;
-      if (getData !== null && getData.length > 0) {
-        while (same) {
-          for (const d of getData) {
-            if (d.id !== randomId) {
-              same = false;
+      try {
+        const db = firebase.firestore();
+        db.collection("/users")
+          .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
+          .get()
+          .then(function (doc) {
+            if (doc.exists) {
+              const firestoreData = doc.data().data;
+              setData(firestoreData);
+              let randomId = Math.floor(Math.random() * 10000);
+              let same = true;
+              if (firestoreData !== null && firestoreData?.length > 0) {
+                while (same) {
+                  for (const d of firestoreData) {
+                    if (d.id !== randomId) {
+                      same = false;
+                    } else {
+                      same = true;
+                    }
+                  }
+                  if (same) {
+                    randomId = Math.floor(Math.random() * 10000);
+                  }
+                }
+              }
+              setNextId(randomId);
+              setItemData([]);
             } else {
-              same = true;
+              console.log("No user");
             }
-          }
-
-          if (same) {
-            randomId = Math.floor(Math.random() * 10000);
-          }
-        }
+          })
+          .catch(function (error) {
+            console.log("Error : ", error);
+          });
+      } catch (err) {
+        console.log(`Error: ${JSON.stringify(err)}`);
       }
-      setNextId(randomId);
-      setItemData([]);
     })();
   });
 
   function delItem(id) {
     const newData = data.filter((d) => d.id !== id);
-    localStorage.removeItem("data");
-    localStorage.setItem("data", JSON.stringify(newData));
+    try {
+      const db = firebase.firestore();
+      db.collection("users")
+        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
+        .set({
+          name: "misato",
+          data: newData,
+        })
+        .then(() => {
+          console.log("Document successfully written!");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    } catch (err) {
+      console.log(`Error: ${JSON.stringify(err)}`);
+    }
+  }
+
+  async function getData() {
+    try {
+      const db = firebase.firestore();
+      db.collection("/users")
+        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            setData(doc.data().data);
+          } else {
+            console.log("no data");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error : ", error);
+        });
+    } catch (err) {
+      console.log(`Error: ${JSON.stringify(err)}`);
+    }
   }
 
   function findWord(item, word) {
@@ -127,6 +179,8 @@ const Home = ({ history }) => {
     return <Guide modal={true} />;
   }
 
+  console.log(data);
+
   return (
     <IonPage>
       <IonHeader>
@@ -177,10 +231,7 @@ const Home = ({ history }) => {
                     expandable
                     onClick={async () => {
                       await delItem(d.id);
-                      const newData = await await JSON.parse(
-                        localStorage.getItem("data")
-                      );
-                      setData(newData);
+                      const newData = await getData();
                     }}
                   >
                     delete

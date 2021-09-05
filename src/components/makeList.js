@@ -19,23 +19,43 @@ import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
 import { addOutline } from "ionicons/icons";
+import firebase from "../config";
 
 const MakeList = ({ history }) => {
   const { id } = useParams();
   const [programs, setProcrams] = useState([{ id: 0, name: "" }]);
-  const [labelName, setLabelName] = useState();
+  const [labelName, setLabelName] = useState(null);
   const [data, setData] = useState([]);
+  const [itemData, setItemData] = useState(null);
 
   useIonViewWillEnter(() => {
-    const getData = JSON.parse(localStorage.getItem("data"));
-    setData(getData);
-    if (getData !== null) {
-      for (const item of getData) {
-        if (item.id === id) {
-          setProcrams(item.i_list);
-          setLabelName(item.label);
-        }
-      }
+    try {
+      const db = firebase.firestore();
+      db.collection("/users")
+        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            const firestoreData = doc.data().data;
+            setData(firestoreData);
+            //データの取り方次第でここなくせそう
+            if (firestoreData !== null) {
+              for (const item of firestoreData) {
+                if (item.id === id) {
+                  setProcrams(item.i_list);
+                  setLabelName(item.label);
+                }
+              }
+            }
+          } else {
+            console.log("No user");
+          }
+        })
+        .catch(function (error) {
+          console.log("Error : ", error);
+        });
+    } catch (err) {
+      console.log(`Error: ${JSON.stringify(err)}`);
     }
   }, [data]);
 
@@ -46,42 +66,10 @@ const MakeList = ({ history }) => {
       (labelName === undefined || labelName === "") &&
       rmNothing.length === 0
     ) {
-      //alert("ラベル名とアイテム名を入力してください");
       return 0;
     }
-    /*} else if (labelName === undefined || labelName === "") {
-      alert("ラベル名を入力してください");
-      return 0;
-    } else if (rmNothing.length === 0) {
-      alert("アイテム名を入力してください");
-      return 0;
-    }*/
-
     const newData = { id: id, label: labelName, i_list: rmNothing };
-
-    if (data !== null) {
-      let changed = false;
-      for (const d of data) {
-        if (d.id === id) {
-          d.i_list = newData.i_list;
-          changed = true;
-          if (d.label !== labelName) {
-            d.label = labelName;
-          }
-        }
-      }
-
-      if (changed) {
-        localStorage.removeItem("data");
-        localStorage.setItem("data", JSON.stringify(data));
-      } else {
-        data.push(newData);
-        localStorage.setItem("data", JSON.stringify(data));
-      }
-    } else {
-      localStorage.setItem("data", JSON.stringify([newData]));
-    }
-
+    setItemData(newData);
     return 1;
   }
 
@@ -112,6 +100,29 @@ const MakeList = ({ history }) => {
     setProcrams(newPrograms);
   }
 
+  //useIonViewWillLeaveでなんでできない？
+  function save() {
+    const db = firebase.firestore();
+    try {
+      db.collection("users")
+        .doc("M0t1g8xjRLQQe6bGaZM9t1dcfPv1")
+        .update({
+          data: data.concat(itemData),
+        })
+        .then(() => {
+          console.log("Document successfully written!");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+          return 0;
+        });
+    } catch (err) {
+      console.log(`Error: ${JSON.stringify(err)}`);
+      return 0;
+    }
+    return 1;
+  }
+
   return (
     <IonPage>
       <IonContent>
@@ -124,7 +135,15 @@ const MakeList = ({ history }) => {
               <IonButton
                 expand="block"
                 onClick={() => {
-                  const saved = pushData();
+                  save();
+                }}
+              >
+                保存
+              </IonButton>
+              <IonButton
+                expand="block"
+                onClick={() => {
+                  const saved = save();
                   if (saved) {
                     history.push(`/list/${id}/qrcode`);
                   }
