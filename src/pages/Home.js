@@ -17,7 +17,13 @@ import {
   IonButton,
   IonButtons,
 } from "@ionic/react";
-import { addOutline, search, helpOutline } from "ionicons/icons";
+import {
+  addOutline,
+  search,
+  helpOutline,
+  trashOutline,
+  createOutline,
+} from "ionicons/icons";
 import { useState } from "react";
 import Guide from "./Guide";
 import "./Home.css";
@@ -176,6 +182,13 @@ const Home = ({ history }) => {
                 </IonItem>
                 <IonItemOptions>
                   <IonItemOption
+                    color="primary"
+                    expandable
+                    routerLink={`/makeList/${data[key].id}`}
+                  >
+                    <IonIcon icon={createOutline} />
+                  </IonItemOption>
+                  <IonItemOption
                     color="danger"
                     expandable
                     onClick={async () => {
@@ -183,14 +196,7 @@ const Home = ({ history }) => {
                       getData();
                     }}
                   >
-                    削除
-                  </IonItemOption>
-                  <IonItemOption
-                    color="primary"
-                    expandable
-                    routerLink={`/makeList/${data[key].id}`}
-                  >
-                    編集
+                    <IonIcon icon={trashOutline} />
                   </IonItemOption>
                 </IonItemOptions>
               </IonItemSliding>
