@@ -32,8 +32,10 @@ export async function updateData(data) {
   const db = firebase.firestore();
   return new Promise((resolve, reject) => {
     db.collection("users")
-      .doc(user.id)
-      .update({ data: data })
+      .doc(user.uid)
+      .update({
+        data: data,
+      })
       .then(() => {
         console.info("Document update successfully written!");
         resolve();
@@ -48,17 +50,19 @@ export async function updateData(data) {
 export async function setData2DB(data) {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
-  db.collection("users")
-    .doc(user.uid)
-    .set({
-      data: data,
-    })
-    .then(() => {
-      console.log("Document successfully written!");
-      return 1;
-    })
-    .catch((error) => {
-      console.error("Error writing document: ", error);
-      return 0;
-    });
+  return new Promise((resolve, reject) => {
+    db.collection("users")
+      .doc(user.uid)
+      .set({
+        data: data,
+      })
+      .then(() => {
+        console.info("Document set successfully written!");
+        resolve();
+      })
+      .catch((error) => {
+        console.error("Error set writing document: ", error);
+        reject(error);
+      });
+  });
 }
