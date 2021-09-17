@@ -30,19 +30,19 @@ export async function getAllData() {
 export async function updateData(data) {
   const user = firebase.auth().currentUser;
   const db = firebase.firestore();
-  db.collection("users")
-    .doc(user.uid)
-    .update({
-      data: data,
-    })
-    .then(() => {
-      console.log("Document successfully written!");
-      return 1;
-    })
-    .catch((error) => {
-      console.error("Error writing document: ", error);
-      return 0;
-    });
+  return new Promise((resolve, reject) => {
+    db.collection("users")
+      .doc(user.id)
+      .update({ data: data })
+      .then(() => {
+        console.info("Document update successfully written!");
+        resolve();
+      })
+      .catch((error) => {
+        console.error("Error update writing document: ", error);
+        reject(error);
+      });
+  });
 }
 
 export async function setData2DB(data) {
