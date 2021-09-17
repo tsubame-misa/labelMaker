@@ -14,3 +14,13 @@ ion-content.login {
   display: flex;
   justify-content: center;
 }
+
+.logo-img-group {
+  display: flex;
+  justify-content: center;
+}
+
+.logo-img {
+  max-width: 700px;
+  width: 100%;
+}
