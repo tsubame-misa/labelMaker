@@ -110,6 +110,12 @@ const MakeList = ({ history }) => {
     }
   }
 
+  function initPrograms() {
+    if (JSON.stringify(programs) === JSON.stringify([{ id: 0, name: "" }])) {
+      return true;
+    }
+    return false;
+  }
   return (
     <IonPage>
       <IonContent>
@@ -122,6 +128,7 @@ const MakeList = ({ history }) => {
             <IonButtons slot="end">
               <IonButton
                 expand="block"
+                disabled={labelName === null && initPrograms()}
                 onClick={() => {
                   save();
                 }}
