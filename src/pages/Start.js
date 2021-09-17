@@ -9,10 +9,11 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import firebase from "../config";
-import "../pages/Home.css";
+import "./start.css";
 import "firebase/auth";
 import "firebase/firestore";
 import icon from "../images/icon.png";
+import img from "../images/OGP.png";
 
 const Setting = ({ history }) => {
   const [user, setUser] = useState(null);
@@ -55,12 +56,14 @@ const Setting = ({ history }) => {
 
   return (
     <IonPage>
-      <IonContent>
-        <IonImg src={icon} />
-        <div className="button">
-          <IonButton color="light" onClick={() => login()}>
-            Sign in with Google
-          </IonButton>
+      <IonContent className="login">
+        <div class="login-page-content">
+          <img src={img} alt="login page" />
+          <div class="login-button">
+            <IonButton color="light" onClick={() => login()}>
+              Sign in with Google
+            </IonButton>
+          </div>
         </div>
       </IonContent>
     </IonPage>

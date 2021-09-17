@@ -1,0 +1,16 @@
+ion-content.login {
+  --background: #fe931d;
+}
+
+.login-page-content {
+  position: absolute;
+  width: 100%;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+}
