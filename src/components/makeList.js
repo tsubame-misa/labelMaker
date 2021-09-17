@@ -13,6 +13,7 @@ import {
   IonButtons,
   useIonViewWillEnter,
   IonIcon,
+  IonTitle,
 } from "@ionic/react";
 /**TODO:Home.cssじゃなくす */
 import "../pages/Home.css";
@@ -114,6 +115,7 @@ const MakeList = ({ history }) => {
       <IonContent>
         <IonHeader>
           <IonToolbar className="Header">
+            {/*} <IonTitle>編集中...</IonTitle>*/}
             <IonButtons slot="start">
               <IonBackButton defaultHref="/home" text="戻る" />
             </IonButtons>
@@ -142,7 +144,7 @@ const MakeList = ({ history }) => {
           <IonToolbar className="LabelName">
             <IonInput
               value={labelName}
-              placeholder="ディスク"
+              placeholder="〇〇特集"
               onIonChange={(e) => setLabelName(e.detail.value)}
               className="LabelName"
               onBlur={() => pushData()}
@@ -156,7 +158,7 @@ const MakeList = ({ history }) => {
               <IonItem className="Item">
                 <IonInput
                   value={item.name}
-                  placeholder="タイトル"
+                  placeholder="20xx年xx月xo日 〇〇さんxx出演"
                   onIonChange={(e) => {
                     const newPrograms = Array.from(programs);
                     newPrograms[key].name = e.detail.value;
