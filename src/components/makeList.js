@@ -113,7 +113,7 @@ const MakeList = ({ history }) => {
     <IonPage>
       <IonContent>
         <IonHeader>
-          <IonToolbar class="Header">
+          <IonToolbar className="Header">
             <IonButtons slot="start">
               <IonBackButton defaultHref="/home" text="戻る" />
             </IonButtons>
@@ -139,7 +139,7 @@ const MakeList = ({ history }) => {
               </IonButton>
             </IonButtons>
           </IonToolbar>
-          <IonToolbar class="LabelName">
+          <IonToolbar className="LabelName">
             <IonInput
               value={labelName}
               placeholder="ディスク"
@@ -153,7 +153,7 @@ const MakeList = ({ history }) => {
         {programs?.map((item, key) => {
           return (
             <IonItemSliding key={item.id}>
-              <IonItem class="Item">
+              <IonItem className="Item">
                 <IonInput
                   value={item.name}
                   placeholder="タイトル"
@@ -186,7 +186,7 @@ const MakeList = ({ history }) => {
                 addNewProgram();
               }
             }}
-            class="AddButton"
+            className="AddButton"
           >
             <IonIcon icon={addOutline} color="primary" />
           </IonButton>

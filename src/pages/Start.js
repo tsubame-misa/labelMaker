@@ -57,12 +57,12 @@ const Setting = ({ history }) => {
   return (
     <IonPage>
       <IonContent className="login">
-        <div class="login-page-content">
-          <div class="logo-img-group">
-            <img class="logo-img" src={img} alt="login page" />
+        <div className="login-page-content">
+          <div className="logo-img-group">
+            <img className="logo-img" src={img} alt="login page" />
           </div>
 
-          <div class="login-button">
+          <div className="login-button">
             <IonButton color="light" onClick={() => login()}>
               Sign in with Google
             </IonButton>

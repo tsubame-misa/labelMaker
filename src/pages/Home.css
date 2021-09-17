@@ -20,8 +20,24 @@
   --padding-bottom: 16px;
   font-size: 25px;
   --ion-toolbar-color: white;
-  --ion-toolbar-background: #f3a659;
+  /*--ion-toolbar-background: #f3a659;*/
+  --ion-toolbar-background: #fe931d;
   /*border-bottom: solid 1px #f0973f;*/
+}
+
+.header-toolbar {
+  display: flex;
+}
+
+.header-img {
+  width: 132px;
+  position: absolute;
+  top: -9px;
+  left: -36px;
+}
+
+.header-toolbar img {
+  width: 50px;
 }
 /*
 .HToolbar {
@@ -41,7 +57,8 @@
 .title-default {
   font-size: 25px;
   color: white;
-  background-color: #f3a659;
+  text-align: left;
+  /*background-color: #f3a659;*/
 }
 
 .LabelName {

@@ -26,7 +26,7 @@ const Guide = ({ modal, history }) => {
         []
       ) : (
         <IonHeader>
-          <IonToolbar class="Header">
+          <IonToolbar className="Header">
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" text="戻る" />
             </IonButtons>
@@ -34,7 +34,7 @@ const Guide = ({ modal, history }) => {
           </IonToolbar>
         </IonHeader>
       )}
-      <IonContent fullscreen class="ion-padding" scroll-y="false">
+      <IonContent fullscreen className="ion-padding" scroll-y="false">
         <IonSlides
           pager={true}
           options={{ initialSlide: 0 }}

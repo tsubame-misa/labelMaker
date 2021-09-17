@@ -16,18 +16,20 @@ import {
   IonItemDivider,
   IonButton,
   IonButtons,
+  IonImg,
 } from "@ionic/react";
 import {
   addOutline,
   search,
-  helpOutline,
   trashOutline,
   createOutline,
+  menuOutline,
 } from "ionicons/icons";
 import { useState } from "react";
 import Guide from "./Guide";
 import "./Home.css";
 import { getAllData, updateData } from "./service/api";
+import icon from "../images/icon.png";
 
 const Home = ({ history }) => {
   const [data, setData] = useState([]);
@@ -139,17 +141,22 @@ const Home = ({ history }) => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar class="Header">
-          <IonTitle>Donuts</IonTitle>
+        <IonToolbar className="Header">
+          <div>
+            <IonImg src={icon} class="header-img" />
+
+            <IonTitle>Donuts</IonTitle>
+          </div>
+
           <IonButtons slot="end" style={{ marginRight: "10px" }}>
             <IonButton
-              fill="outline"
+              fill="clear"
               strong={true}
               onClick={() => {
                 history.push("/setting");
               }}
             >
-              <IonIcon icon={helpOutline} />
+              <IonIcon icon={menuOutline} />
             </IonButton>
           </IonButtons>
         </IonToolbar>

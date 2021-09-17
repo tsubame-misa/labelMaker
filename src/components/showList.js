@@ -59,7 +59,7 @@ const ShowList = () => {
     <IonPage>
       <IonContent>
         <IonHeader>
-          <IonToolbar class="Header">
+          <IonToolbar className="Header">
             <IonButtons slot="start">
               <IonBackButton defaultHref="/" text="戻る" />
             </IonButtons>
@@ -70,7 +70,7 @@ const ShowList = () => {
               </IonButton>
             </IonButtons>
           </IonToolbar>
-          <IonToolbar class="Label">
+          <IonToolbar className="Label">
             <IonItem lines="none">{labelName}</IonItem>
           </IonToolbar>
         </IonHeader>

@@ -24,7 +24,7 @@ const Setting = ({ history }) => {
     <IonPage>
       <IonContent>
         <IonHeader>
-          <IonToolbar class="Header">
+          <IonToolbar className="Header">
             <IonTitle>設定</IonTitle>
             <IonButtons slot="start">
               <IonBackButton defaultHref="/home" text="戻る" />
