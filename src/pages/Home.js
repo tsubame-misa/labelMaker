@@ -183,7 +183,14 @@ const Home = ({ history }) => {
                       getData();
                     }}
                   >
-                    delete
+                    削除
+                  </IonItemOption>
+                  <IonItemOption
+                    color="primary"
+                    expandable
+                    routerLink={`/makeList/${data[key].id}`}
+                  >
+                    編集
                   </IonItemOption>
                 </IonItemOptions>
               </IonItemSliding>
