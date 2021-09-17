@@ -39,6 +39,19 @@
 .header-toolbar img {
   width: 50px;
 }
+
+.plus-button-group {
+  display: flex;
+  justify-content: center;
+}
+
+.plus-button {
+  margin-top: 10px;
+  height: 40px;
+}
+
+button.button-native.plus-button {
+}
 /*
 .HToolbar {
   --padding-top: 15px;

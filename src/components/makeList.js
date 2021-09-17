@@ -173,23 +173,25 @@ const MakeList = ({ history }) => {
             </IonItemSliding>
           );
         })}
-        <div style={{ padding: "5px" }}>
-          <IonButton
-            fill="clear"
-            onClick={() => {
-              if (programs.length > 0) {
-                const preData = programs[programs.length - 1];
-                if (preData.name !== "") {
+        <div className="plus-button-group">
+          <div className="plus-button">
+            <IonButton
+              fill="outline"
+              onClick={() => {
+                if (programs.length > 0) {
+                  const preData = programs[programs.length - 1];
+                  if (preData.name !== "") {
+                    addNewProgram();
+                  }
+                } else {
                   addNewProgram();
                 }
-              } else {
-                addNewProgram();
-              }
-            }}
-            className="AddButton"
-          >
-            <IonIcon icon={addOutline} color="primary" />
-          </IonButton>
+              }}
+              className="AddButton"
+            >
+              <IonIcon icon={addOutline} color="primary" />
+            </IonButton>
+          </div>
         </div>
       </IonContent>
     </IonPage>
