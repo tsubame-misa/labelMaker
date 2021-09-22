@@ -44,7 +44,7 @@ const App = () => {
         setUser(null);
       }
     });
-  }, [user]);
+  }, []);
 
   return (
     <IonApp>

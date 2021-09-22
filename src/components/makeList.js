@@ -89,6 +89,7 @@ const MakeList = ({ history }) => {
 
   //useIonViewWillLeaveでなんでできない？
   function save() {
+    //TODO:一回消すとダメ
     let same = false;
     const newData = data.map((item) => {
       if (item.id === id) {

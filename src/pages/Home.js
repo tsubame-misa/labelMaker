@@ -144,7 +144,6 @@ const Home = ({ history }) => {
         <IonToolbar className="Header">
           <div>
             <IonImg src={icon} class="header-img" />
-
             <IonTitle>Donuts</IonTitle>
           </div>
 
