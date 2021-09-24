@@ -130,7 +130,9 @@ const MakeList = ({ history }) => {
             <IonButtons slot="end">
               <IonButton
                 expand="block"
-                disabled={labelName === null && initPrograms()}
+                disabled={
+                  (labelName === null || labelName === "") && initPrograms()
+                }
                 onClick={() => {
                   save();
                 }}
