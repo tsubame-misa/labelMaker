@@ -10,7 +10,6 @@ import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
 import Setting from "./pages/Setting";
 import Start from "./pages/Start";
-import { useIonViewWillEnter } from "@ionic/react";
 import { useEffect, useState } from "react";
 import firebase from "./config";
 

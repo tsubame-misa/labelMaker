@@ -24,10 +24,11 @@ import { getAllData, updateData, setData2DB } from "../pages/service/api";
 
 const MakeList = ({ history }) => {
   const { id } = useParams();
-  const [programs, setProcrams] = useState([{ id: 0, name: "" }]);
+  const [programs, setPrograms] = useState([{ id: 0, name: "" }]);
   const [labelName, setLabelName] = useState(null);
   const [data, setData] = useState([]);
   const [itemData, setItemData] = useState(null);
+  const [showPlusButton, setShowPlusButton] = useState(false);
 
   useIonViewWillEnter(() => {
     (async () => {
@@ -38,7 +39,7 @@ const MakeList = ({ history }) => {
         for (const item of data) {
           console.log(item.id, id);
           if (item.id === id) {
-            setProcrams(item.i_list);
+            setPrograms(item.i_list);
             setLabelName(item.label);
           }
         }
@@ -62,7 +63,7 @@ const MakeList = ({ history }) => {
 
   function delItem(key) {
     const newData = programs.filter((_, i) => i !== key);
-    setProcrams(newData);
+    setPrograms(newData);
   }
 
   function addNewProgram() {
@@ -84,7 +85,7 @@ const MakeList = ({ history }) => {
     }
     const newPrograms = Array.from(programs);
     newPrograms.push({ id: randomId, name: "" });
-    setProcrams(newPrograms);
+    setPrograms(newPrograms);
   }
 
   //useIonViewWillLeaveでなんでできない？
@@ -168,9 +169,14 @@ const MakeList = ({ history }) => {
                   value={item.name}
                   placeholder="20xx年xx月xo日 〇〇さんxx出演"
                   onIonChange={(e) => {
+                    if (e.target.value !== "") {
+                      setShowPlusButton(true);
+                    } else {
+                      setShowPlusButton(false);
+                    }
                     const newPrograms = Array.from(programs);
                     newPrograms[key].name = e.detail.value;
-                    setProcrams(newPrograms);
+                    setPrograms(newPrograms);
                   }}
                   onBlur={() => pushData()}
                 ></IonInput>
@@ -185,22 +191,26 @@ const MakeList = ({ history }) => {
         })}
         <div className="plus-button-group">
           <div className="plus-button">
-            <IonButton
-              fill="outline"
-              onClick={() => {
-                if (programs.length > 0) {
-                  const preData = programs[programs.length - 1];
-                  if (preData.name !== "") {
+            {showPlusButton && (
+              <IonButton
+                fill="outline"
+                onClick={() => {
+                  if (programs.length > 0) {
+                    const preData = programs[programs.length - 1];
+                    if (preData.name !== "") {
+                      addNewProgram();
+                      setShowPlusButton(false);
+                    }
+                  } else {
                     addNewProgram();
+                    setShowPlusButton(false);
                   }
-                } else {
-                  addNewProgram();
-                }
-              }}
-              className="AddButton"
-            >
-              <IonIcon icon={addOutline} color="primary" />
-            </IonButton>
+                }}
+                className="AddButton"
+              >
+                <IonIcon icon={addOutline} color="primary" />
+              </IonButton>
+            )}
           </div>
         </div>
       </IonContent>
