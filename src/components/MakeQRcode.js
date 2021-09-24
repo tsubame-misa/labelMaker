@@ -13,12 +13,14 @@ import "../pages/Home.css";
 import { useState } from "react";
 import { useParams } from "react-router";
 import { getAllData } from "../pages/service/api";
+import "./QRcode.css";
 
 const MakeQRcode = () => {
   const { id } = useParams();
   const [labelName, setLabelName] = useState();
   const [showLoading, setShowLoading] = useState(true);
   const [url, setUrl] = useState(null);
+  const [isExistCd, setIsExistCd] = useState(false);
 
   useIonViewWillEnter(() => {
     (async () => {
@@ -26,6 +28,8 @@ const MakeQRcode = () => {
       for (const item of data) {
         if (item.id === id) {
           setLabelName(item.label);
+          setIsExistCd(true);
+          break;
           //setShowLoading(false);
         }
       }
@@ -46,26 +50,32 @@ const MakeQRcode = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" text="戻る" />
           </IonButtons>
-          <IonButtons slot="end">
-            <IonButton
-              onClick={() => {
-                window.print();
-              }}
-            >
-              印刷
-            </IonButton>
-          </IonButtons>
+          {isExistCd && (
+            <IonButtons slot="end">
+              <IonButton
+                onClick={() => {
+                  window.print();
+                }}
+              >
+                印刷
+              </IonButton>
+            </IonButtons>
+          )}
           <IonButtons slot="end"></IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {!showLoading && (
-          <div className="QRcode">
-            <div className="test">
-              <img src={url} alt="QRコード" />
-              <p className="QRlabel">{labelName}</p>
+        {!isExistCd ? (
+          <div className="no-data">データが存在しません</div>
+        ) : (
+          !showLoading && (
+            <div className="QRcode">
+              <div className="test">
+                <img src={url} alt="QRコード" />
+                <p className="QRlabel">{labelName}</p>
+              </div>
             </div>
-          </div>
+          )
         )}
       </IonContent>
       <IonLoading isOpen={showLoading} />
