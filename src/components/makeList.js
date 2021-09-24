@@ -143,7 +143,7 @@ const MakeList = ({ history }) => {
               <IonButton
                 expand="block"
                 onClick={() => {
-                  const saved = save();
+                  save();
                   //if (saved) {
                   history.push(`/list/${id}/qrcode`);
                   // }
@@ -153,6 +153,7 @@ const MakeList = ({ history }) => {
               </IonButton>
             </IonButtons>
           </IonToolbar>
+          <div className="make-bar">登録・編集中</div>
           <IonToolbar className="LabelName">
             <IonInput
               value={labelName}

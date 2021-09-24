@@ -29,12 +29,15 @@ const MakeQRcode = () => {
           //setShowLoading(false);
         }
       }
-      const response = await fetch(
+      /*const response = await fetch(
         `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`
       );
-      setUrl(response.url);
-      setShowLoading(false);
+      setUrl(response.url);*/
+      setUrl(
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${process.env.REACT_APP_API_ENDPOINT}/list/${id}`
+      );
     })();
+    setShowLoading(false);
   }, [labelName]);
   return (
     <IonPage>
@@ -56,15 +59,13 @@ const MakeQRcode = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {!showLoading ? (
+        {!showLoading && (
           <div className="QRcode">
             <div className="test">
               <img src={url} alt="QRコード" />
               <p className="QRlabel">{labelName}</p>
             </div>
           </div>
-        ) : (
-          []
         )}
       </IonContent>
       <IonLoading isOpen={showLoading} />

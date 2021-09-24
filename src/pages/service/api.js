@@ -17,7 +17,7 @@ export async function getAllData() {
     const request = await db.collection("/users").doc(user.uid).get();
     const responce = await request.data();
     console.log(responce);
-    if (responce !== undefined) {
+    if (responce !== undefined && responce !== null) {
       return responce.data;
     } else {
       return [];

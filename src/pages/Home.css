@@ -102,6 +102,13 @@ button.button-native.plus-button {
   align-items: center;
 }
 
+.make-bar {
+  display: flex;
+  justify-content: center;
+  background-color: #ffeedb;
+  color: #b57500;
+}
+
 @page pagename {
   size: A4 portrait;
   margin: 10px;

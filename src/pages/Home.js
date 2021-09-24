@@ -194,16 +194,17 @@ const Home = ({ history }) => {
             ))}
 
           {data?.map((d, key) => {
+            console.log(d);
             return (
               <IonItemSliding key={d.id}>
-                <IonItem routerLink={`/list/${data[key].id}`}>
+                <IonItem routerLink={`/list/${data[key]?.id}`}>
                   {d.label}
                 </IonItem>
                 <IonItemOptions>
                   <IonItemOption
                     color="primary"
                     expandable
-                    routerLink={`/makeList/${data[key].id}`}
+                    routerLink={`/makeList/${data[key]?.id}`}
                   >
                     <IonIcon icon={createOutline} />
                   </IonItemOption>
