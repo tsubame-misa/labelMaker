@@ -20,7 +20,6 @@ import {
 } from "@ionic/react";
 import {
   addOutline,
-  search,
   trashOutline,
   createOutline,
   menuOutline,
@@ -35,7 +34,7 @@ const Home = ({ history }) => {
   const [data, setData] = useState([]);
   const [nextId, setNextId] = useState();
   const [searchText, setSearchText] = useState("");
-  const [serch, setSearch] = useState(false);
+  const [isSearch, setSearch] = useState(false);
   const [itemData, setItemData] = useState([]);
   const [searchItem, setSearchItem] = useState([]);
   const [allData, setAllData] = useState([]);
@@ -119,7 +118,6 @@ const Home = ({ history }) => {
     }
 
     if (!search) {
-      setSearch(!search);
       setData(allData);
       setSearchItem([]);
       setItemData([]);
@@ -168,7 +166,6 @@ const Home = ({ history }) => {
           cancelButtonText="キャンセル"
           onIonCancel={() => SearchData(false)}
           onIonChange={(e) => {
-            setSearch(!search);
             SearchData(true, e.detail.value);
           }}
         ></IonSearchbar>
