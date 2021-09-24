@@ -37,9 +37,10 @@ const MakeList = ({ history }) => {
       //データの取り方次第でここなくせそう
       if (data !== null) {
         for (const item of data) {
-          console.log(item.id, id);
           if (item.id === id) {
-            setPrograms(item.i_list);
+            if (item.i_list.length !== 0) {
+              setPrograms(item.i_list);
+            }
             setLabelName(item.label);
           }
         }
