@@ -94,6 +94,14 @@ button.button-native.plus-button {
   justify-content: center;
 }
 
+.no-data-msg {
+  height: 500px;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @page pagename {
   size: A4 portrait;
   margin: 10px;

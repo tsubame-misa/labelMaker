@@ -34,7 +34,7 @@ const Home = ({ history }) => {
   const [data, setData] = useState([]);
   const [nextId, setNextId] = useState();
   const [searchText, setSearchText] = useState("");
-  const [isSearch, setSearch] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
   const [itemData, setItemData] = useState([]);
   const [searchItem, setSearchItem] = useState([]);
   const [allData, setAllData] = useState([]);
@@ -164,9 +164,15 @@ const Home = ({ history }) => {
           showCancelButton="focus"
           placeholder="検索"
           cancelButtonText="キャンセル"
-          onIonCancel={() => SearchData(false)}
+          onIonCancel={() => {
+            SearchData(false);
+            setIsSearch(false);
+          }}
           onIonChange={(e) => {
             SearchData(true, e.detail.value);
+            if (e.detail.value !== "") {
+              setIsSearch(true);
+            }
           }}
         ></IonSearchbar>
 
@@ -177,6 +183,16 @@ const Home = ({ history }) => {
           ) : (
             []
           )}
+
+          {data.length === 0 &&
+            (!isSearch ? (
+              <div className="no-data-msg">
+                データがありません。右下のボタンから追加しましょう
+              </div>
+            ) : (
+              <div className="no-data-msg">該当するデータはありません</div>
+            ))}
+
           {data?.map((d, key) => {
             return (
               <IonItemSliding key={d.id}>
