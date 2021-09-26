@@ -5,7 +5,7 @@ ion-content.login {
 .login-page-content {
   position: absolute;
   width: 100%;
-  top: 45%;
+  top: 47.5%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

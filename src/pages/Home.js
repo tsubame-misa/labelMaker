@@ -187,7 +187,9 @@ const Home = ({ history }) => {
           {data.length === 0 &&
             (!isSearch ? (
               <div className="no-data-msg">
-                データがありません。右下のボタンから追加しましょう
+                データがありません。
+                <br />
+                右下のボタンから追加しましょう
               </div>
             ) : (
               <div className="no-data-msg">該当するデータはありません</div>

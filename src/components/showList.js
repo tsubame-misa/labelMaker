@@ -11,6 +11,7 @@ import {
   IonBackButton,
   IonButtons,
   useIonViewWillEnter,
+  IonLabel,
 } from "@ionic/react";
 
 import "../pages/Home.css";
@@ -71,7 +72,9 @@ const ShowList = () => {
             </IonButtons>
           </IonToolbar>
           <IonToolbar className="Label">
-            <IonItem lines="none">{labelName}</IonItem>
+            <IonItem lines="none" style={{ fontSize: "1.5rem" }}>
+              {labelName}
+            </IonItem>
           </IonToolbar>
         </IonHeader>
 

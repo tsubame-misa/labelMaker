@@ -29,6 +29,8 @@ const MakeList = ({ history }) => {
   const [data, setData] = useState([]);
   const [itemData, setItemData] = useState(null);
   const [showPlusButton, setShowPlusButton] = useState(false);
+  const [preLabel, setPreLabel] = useState(null);
+  const [preProgram, setPreProgram] = useState([]);
 
   useIonViewWillEnter(() => {
     (async () => {
@@ -40,8 +42,10 @@ const MakeList = ({ history }) => {
           if (item.id === id) {
             if (item.i_list.length !== 0) {
               setPrograms(item.i_list);
+              setPreProgram(item.i_list);
             }
             setLabelName(item.label);
+            setPreLabel(item.label);
           }
         }
       }
@@ -63,7 +67,10 @@ const MakeList = ({ history }) => {
   }
 
   function delItem(key) {
+    console.log(key, programs);
     const newData = programs.filter((_, i) => i !== key);
+    console.log(newData);
+    setItemData({ id: id, label: labelName, i_list: newData });
     setPrograms(newData);
   }
 
@@ -104,6 +111,7 @@ const MakeList = ({ history }) => {
     if (!same) {
       newData.push(itemData);
     }
+
     if (data.length === 0) {
       console.log("set");
       setData2DB(newData);
@@ -161,6 +169,7 @@ const MakeList = ({ history }) => {
               onIonChange={(e) => setLabelName(e.detail.value)}
               className="LabelName"
               onBlur={() => pushData()}
+              style={{ fontSize: "1.5rem" }}
             ></IonInput>
           </IonToolbar>
         </IonHeader>
