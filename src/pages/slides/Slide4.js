@@ -19,17 +19,6 @@ const Slide4 = () => {
           <p style={{ marginBottom: "3px" }}>
             QRコードを読み込んで中身を確認する
           </p>
-          <p
-            style={{
-              fontSize: "1rem",
-              // marginTop: "0px",
-            }}
-          >
-            ※リストを作成した時と
-            <br />
-            <b style={{ color: "#f0973f" }}>同じ端末の同じブラウザ</b>
-            で見てください
-          </p>
         </div>
       </div>
     </IonSlide>
